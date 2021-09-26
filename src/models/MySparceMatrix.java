@@ -25,6 +25,7 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 	}
 
 
+
 	public C get(TR row, TC column) {
 		this.reset();
 		while (this.isInto()) {
