@@ -10,12 +10,7 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 
 	public MySparceMatrix(Comparator<TC> sortCols, Comparator<TR> sortRows) {
 
-		Comparator<MyHeader<TC, TR, C>> sortColsMatrix = new Comparator<MyHeader<TC, TR, C>>() {
-			@Override
-			public int compare(MyHeader<TC, TR, C> o1, MyHeader<TC, TR, C> o2) {
-				return sortCols.compare(o1.getColumn(), o2.getColumn());
-			}
-		};
+		Comparator<MyHeader<TC, TR, C>> sortColsMatrix = (o1, o2) -> sortCols.compare(o1.getColumn(), o2.getColumn());
 
 		Comparator<CellMatrix<TC, TR, C>> sortRowsMatrix = new Comparator<CellMatrix<TC, TR, C>>() {
 			@Override
