@@ -7,8 +7,12 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 
 	private Comparator<MyHeader<TC, TR, C>> sortCols;
 	private Comparator<CellMatrix<TC, TR, C>> sortRows;
+	private Comparator<TR> compareRows;
+	private Comparator<TC> compareCols;
 
 	public MySparceMatrix(Comparator<TC> sortCols, Comparator<TR> sortRows) {
+		this.compareCols=sortCols;
+		this.compareRows=sortRows;
 
 		Comparator<MyHeader<TC, TR, C>> sortColsMatrix = new Comparator<MyHeader<TC, TR, C>>() {
 			@Override
@@ -137,10 +141,29 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 			header.reset();
 			TR row = header.getNextRow();
 			while(row != null) {
-				System.out.println(header.getColumn()+" / "+row+" : "+ header.getCell(row));
+				System.out.println(header.getColumn().toString()+" / "+row.toString()+" : "+ header.getCell(row));
 				row = header.getNextRow();
 			}
 		}
+	}
+
+	public String numberOfElementsIntoRectangularArea(TR x, TR x1, TC y, TC y1){
+		this.reset();
+		int count = 0;
+		while (this.isInto()) {
+			MyHeader<TC,TR,C> header = this.getNext();
+			header.reset();
+			TR row = header.getNextRow();
+			while(row != null) {
+				if (compareRows.compare(row, x)>=0 && compareRows.compare(row, x1)<=0
+				&& compareCols.compare(header.getColumn(), y)>=0 && compareCols.compare(header.getColumn(), y1)<=0){
+					System.out.println(header.getCell(row));
+					count++;
+				}
+				row = header.getNextRow();
+			}
+		}
+		return count+"xd";
 	}
 	
 }
