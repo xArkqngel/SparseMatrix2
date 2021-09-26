@@ -37,11 +37,11 @@ public class GeoSparse<TC,TR,T> extends MySparceMatrix{
     }
 
     public String numberOfElementsIntoRectangularArea(Coordinate origen, Coordinate fin){
-        int elements = 0;
-        Node<T> node = this.getHeader();
-        while (node.){
-        }
-
+//        int elements = 0;
+//        Node<T> node = this.getHeader();
+//        while (node.){
+//        }
+//
         return "";
     }
 
