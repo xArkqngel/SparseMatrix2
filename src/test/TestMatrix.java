@@ -1,6 +1,7 @@
 package test;
 
 import models.Coordinates;
+import models.GeoSparse;
 import models.MySparceMatrix;
 
 public class TestMatrix {
@@ -9,10 +10,10 @@ public class TestMatrix {
 
 		MySparceMatrix<String, Integer, String> matrix = new MySparceMatrix<>((x, y) -> x.compareTo(y),
 				(x, y) -> x - y);
-		Coordinates<Integer,Integer,String> m = new Coordinates<>((x, y) -> x.compareTo(y),
+		GeoSparse<Integer,Integer,String> m = new GeoSparse<>((x, y) -> x.compareTo(y),
 				(x, y) -> x - y);
 
-		System.out.println(m.distanceBetween(2,2,6,4)+"");
+		System.out.println(m.distanceBetween(new Coordinates(41.57879F,  1.617221F), new Coordinates(37.176487F, -3.597929F))+"");
 
 //		matrix.set(11, "A", "carlitos");
 //		matrix.set(1134, "C", "Mario");
