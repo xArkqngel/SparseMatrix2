@@ -127,6 +127,7 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 			}
 		}
 	}
+
 	
 	public void test() {
 		this.reset();
