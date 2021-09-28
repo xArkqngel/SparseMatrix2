@@ -158,7 +158,7 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 				row = header.getNextRow();
 			}
 		}
-		return count+"xd";
+		return count+" ";
 	}
 
 	public String numberInCircualArea(TR circleX, TC circleY, int radius){
@@ -191,13 +191,11 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 	}
 	public float distanceBetween(TR origenX, TC origenY, TR destinoX, TC destinoY){
 		float radtierra = 6378.0F;
-		double difLat = Math.toRadians((Float) origenX- (Float) destinoX);
-		double difLong = Math.toRadians((Float)origenY- (Float)destinoY);
+		double difLat = Math.toRadians((Float) destinoX- (Float) origenX);
+		double difLong = Math.toRadians((Float)destinoY- (Float)origenY);
 		float aux = (float) (Math.pow(Math.sin(difLat/2),2) + Math.cos(Math.toRadians((Float) origenX)) * Math.cos(Math.toRadians((Float) destinoX)) * Math.pow(Math.sin(difLong/2),2));
-		System.out.println(aux);
 		float aux1 = (float) (Math.atan2(Math.sqrt(aux),Math.sqrt(1-aux)));
-		System.out.println(aux1);
-		return (float) (radtierra * aux1);
+		return  (radtierra * aux1);
 	}
 	
 }
