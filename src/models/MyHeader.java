@@ -6,11 +6,13 @@ import java.util.Comparator;
 public class MyHeader<TC, TR, C> extends SimpleList<CellMatrix<TC, TR, C>> {
 
 	private TC nameColumn;
+	private TR nameRow;
 	private Comparator<CellMatrix<TC, TR, C>> comparator;
 
 
 	public MyHeader(TC nameColumn, TR nameRow, C info, Comparator<CellMatrix<TC, TR, C>> comparator) {
 		this.nameColumn = nameColumn;
+		this.nameRow = nameRow;
 		this.comparator = comparator;
 		this.addSort(new CellMatrix<>(info, nameColumn, nameRow), comparator);
 	}
@@ -18,6 +20,10 @@ public class MyHeader<TC, TR, C> extends SimpleList<CellMatrix<TC, TR, C>> {
 
 	public TC getColumn() {
 		return nameColumn;
+	}
+
+	public TR getRow(){
+		return nameRow;
 	}
 	
 	public void resetRows() {
