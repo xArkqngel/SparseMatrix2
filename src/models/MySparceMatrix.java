@@ -160,5 +160,44 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 		}
 		return count+"xd";
 	}
+
+	public String numberInCircualArea(TR circleX, TC circleY, int radius){
+		this.reset();
+		int count = 0;
+		double circleRadius = Math.sqrt(radius);
+		while (this.isInto()){
+			MyHeader<TC,TR,C> header = this.getNext();
+			header.reset();
+			TR row = header.getNextRow();
+			while (row!=null){
+				double aux = this.obtainSQRT((Float) row,(Float)header.getColumn(),(Float) circleX,(Float) circleY);
+				if (aux<=circleRadius){
+					count++;
+
+				}
+				row = header.getNextRow();
+			}
+		}
+		return "Numero de elementos dentro del circulo ---> " +count;
+	}
+
+
+	public double obtainSQRT(float xOrigin, float yOrigin, float xCircle,float yCircle){
+		double aux1 = Math.pow(xOrigin - xCircle,2);
+		double aux2 = Math.pow(yOrigin - yCircle,2);
+
+		return Math.sqrt(aux1+aux2);
+
+	}
+	/**public float distanceBetween(Coordinates origen, Coordinates destino){
+		float radtierra = 6378.0F;
+		double difLat = Math.toRadians(destino.lat- origen.lat);
+		double difLong = Math.toRadians(destino.lon- origen.lon);
+		float aux = (float) (Math.pow(Math.sin(difLat/2),2) + Math.cos(Math.toRadians(origen.lat)) * Math.cos(Math.toRadians(destino.lat)) * Math.pow(Math.sin(difLong/2),2));
+		System.out.println(aux);
+		float aux1 = (float) (2Math.atan2(Math.sqrt(aux),Math.sqrt(1-aux)));
+		System.out.println(aux1);
+		return (float) (radtierra aux1);
+	}*/
 	
 }

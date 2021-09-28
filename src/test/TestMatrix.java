@@ -20,7 +20,7 @@ public class TestMatrix {
 //		matrix.test();
 
 		System.out.println(matrix.numberOfElementsIntoRectangularArea(331F,340F,122F,140F));
-
+		System.out.println(matrix.numberInCircualArea(330F,120F,100));
 
 	}
 }
