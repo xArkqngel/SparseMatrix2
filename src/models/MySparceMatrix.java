@@ -189,15 +189,15 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 		return Math.sqrt(aux1+aux2);
 
 	}
-	/**public float distanceBetween(Coordinates origen, Coordinates destino){
+	public float distanceBetween(TR origenX, TC origenY, TR destinoX, TC destinoY){
 		float radtierra = 6378.0F;
-		double difLat = Math.toRadians(destino.lat- origen.lat);
-		double difLong = Math.toRadians(destino.lon- origen.lon);
-		float aux = (float) (Math.pow(Math.sin(difLat/2),2) + Math.cos(Math.toRadians(origen.lat)) * Math.cos(Math.toRadians(destino.lat)) * Math.pow(Math.sin(difLong/2),2));
+		double difLat = Math.toRadians((Float) origenX- (Float) destinoX);
+		double difLong = Math.toRadians((Float)origenY- (Float)destinoY);
+		float aux = (float) (Math.pow(Math.sin(difLat/2),2) + Math.cos(Math.toRadians((Float) origenX)) * Math.cos(Math.toRadians((Float) destinoX)) * Math.pow(Math.sin(difLong/2),2));
 		System.out.println(aux);
-		float aux1 = (float) (2Math.atan2(Math.sqrt(aux),Math.sqrt(1-aux)));
+		float aux1 = (float) (Math.atan2(Math.sqrt(aux),Math.sqrt(1-aux)));
 		System.out.println(aux1);
-		return (float) (radtierra aux1);
-	}*/
+		return (float) (radtierra * aux1);
+	}
 	
 }

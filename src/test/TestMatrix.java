@@ -21,6 +21,6 @@ public class TestMatrix {
 
 		System.out.println(matrix.numberOfElementsIntoRectangularArea(331F,340F,122F,140F));
 		System.out.println(matrix.numberInCircualArea(330F,120F,100));
-
+		System.out.println(matrix.distanceBetween(1F,1F,5F,5F));
 	}
 }
