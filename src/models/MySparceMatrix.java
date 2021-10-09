@@ -1,5 +1,7 @@
 package models;
 
+import list.SimpleList;
+
 import java.util.Comparator;
 
 

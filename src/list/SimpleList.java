@@ -1,4 +1,4 @@
-package models;
+package list;
 
 import java.util.Comparator;
 
@@ -19,9 +19,16 @@ public class SimpleList<T> {
 		return header == null;
 	}
 
+	public void addHead(T info){
+		this.header = new Node<>(info);
+	}
+	public void addNext(Node<T> aux,T info){
+
+	}
+
 	public void add(T item) {
 		if (header == null) {
-			this.header = new Node<>(item);
+			addHead(item);
 			size++;
 		} else {
 			Node<T> aux = this.header;
