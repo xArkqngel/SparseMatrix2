@@ -9,6 +9,14 @@ public class MyDoubleList<T> {
         this.last = null;
     }
 
+    public MyDoubleNode<T> getFirst() {
+        return first;
+    }
+
+    public MyDoubleNode<T> getLast() {
+        return last;
+    }
+
     public boolean isEmpty(){
         return this.first == null;
     }

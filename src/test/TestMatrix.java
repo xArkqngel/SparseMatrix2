@@ -17,6 +17,8 @@ public class TestMatrix {
 		matrix.set(12F,132F,"S4S");
 		matrix.set(332F,124F,"S5S");
 
+		System.out.println(matrix.existCol(1F));
+
 //		matrix.test();
 
 		System.out.println(matrix.numberOfElementsIntoRectangularArea(331F,340F,122F,140F));

@@ -22,8 +22,23 @@ public class MyMatrix<TC,TR,C>{
     }
     public void add(TC column,TR row,C info) {
         MyHeader<TC,C> col = cols.search(new MyHeader<>(column,info));
-        if (col!=null){
+        MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row,info));
+        if (col!=null && rowH!=null){
 
+        }else if(){
+
+        }else if (){
+
+        }else {
+            if (cols.getFirst().getInfo()==null){
+                MyHeader<TC,C> colsCells = new MyHeader<TC,C>(column);
+                colsCells.add(info);
+                cols.add(colsCells);
+            }else if (rows.getFirst().getInfo()== null){
+                MyHeader<TR,C> rowsCells = new MyHeader<TR,C>(row);
+                rowsCells.add(info);
+                rows.add(rowsCells);
+            }
         }
     }
     public void insert(TC column,TR row,C info) {
