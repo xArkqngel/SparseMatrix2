@@ -47,13 +47,21 @@ public class MyMatrix<TC,TR,C>{
             rowH.add(node);
         }else if(col==null && rowH!=null){
             cols.add(columnH);
+            cols.getLast().getInfo().cells.addNode(node);
             rowH.add(node);
+            System.out.println(cols.getLast().getInfo().cells.getLast().getInfo()+" no cols");
         }else if (col!=null && rowH==null){
             rows.add(rowHeader);
+            rows.getLast().getInfo().cells.addNode(node);
             col.add(node);
+            System.out.println(rows.getLast().getInfo().cells.getLast().getInfo()+" no rows");
         }else {
             cols.add(columnH);
+            cols.getFirst().getInfo().cells.addNode(node);
             rows.add(rowHeader);
+            rows.getFirst().getInfo().cells.addNode(node);
+            System.out.println(cols.getFirst().getInfo().cells.getLast().getInfo()+" nono");
+
         }
     }
 
@@ -89,5 +97,63 @@ public class MyMatrix<TC,TR,C>{
             node.setInfo(info);
             rowH.cells.search(node).setInfo(info);
         }
+    }
+
+//    public String numberOfElementsIntoRectangularArea(TR x, TR x1, TC y, TC y1){
+//        this.reset();
+//        int count = 0;
+//        while (this.isInto()) {
+//            models.MyHeader<TC,TR,C> header = this.getNext();
+//            header.reset();
+//            TR row = header.getNextRow();
+//            while(row != null) {
+//                if (compareRows.compare(row, x)>=0 && compareRows.compare(row, x1)<=0
+//                        && compareCols.compare(header.getColumn(), y)>=0 && compareCols.compare(header.getColumn(), y1)<=0){
+//                    System.out.println(header.getCell(row));
+//                    count++;
+//                }
+//                row = header.getNextRow();
+//            }
+//        }
+//        return count+"xd";
+//    }
+//
+//    public String numberInCircualArea(TR circleX, TC circleY, int radius){
+//        this.reset();
+//        int count = 0;
+//        double circleRadius = Math.sqrt(radius);
+//        while (this.isInto()){
+//            models.MyHeader<TC,TR,C> header = this.getNext();
+//            header.reset();
+//            TR row = header.getNextRow();
+//            while (row!=null){
+//                double aux = this.obtainSQRT((Float) row,(Float)header.getColumn(),(Float) circleX,(Float) circleY);
+//                if (aux<=circleRadius){
+//                    count++;
+//
+//                }
+//                row = header.getNextRow();
+//            }
+//        }
+//        return "Numero de elementos dentro del circulo ---> " +count;
+//    }
+
+
+    public double obtainSQRT(float xOrigin, float yOrigin, float xCircle,float yCircle){
+        double aux1 = Math.pow(xOrigin - xCircle,2);
+        double aux2 = Math.pow(yOrigin - yCircle,2);
+
+        return Math.sqrt(aux1+aux2);
+
+    }
+    public float distanceBetween(TR origenX, TC origenY, TR destinoX, TC destinoY){
+        float radtierra = 6378.0F;
+        double difLat = Math.toRadians((Float) origenX- (Float) destinoX);
+        double difLong = Math.toRadians((Float)origenY- (Float)destinoY);
+        float aux = (float) (Math.pow(Math.sin(difLat/2),2) + Math.cos(Math.toRadians((Float) origenX)) * Math.cos(Math.toRadians((Float) destinoX)) * Math.pow(Math.sin(difLong/2),2));
+        System.out.println(aux);
+        float aux1 = (float) (Math.atan2(Math.sqrt(aux),Math.sqrt(1-aux)));
+        System.out.println(aux1);
+        return (float) (radtierra * aux1);
     }
 }

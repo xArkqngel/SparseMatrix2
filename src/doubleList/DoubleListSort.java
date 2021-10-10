@@ -41,14 +41,14 @@ public class DoubleListSort<T> extends MyDoubleList<T> {
      * @return
      */
     public T search(T info){
-        if (comparator.compare(this.last.info,info)==0){
+        if (this.last!=null && comparator.compare(this.last.info,info)==0){
             return this.last.info;
         }else {
             MyDoubleNode<T> aux = this.first;
             while (aux!=null&&comparator.compare(aux.info, info)!=0){
                 aux = aux.next;
             }
-            if (comparator.compare(aux.info,info)==0){
+            if (aux != null && comparator.compare(aux.info,info)==0){
                 return aux.info;
             }
         }
