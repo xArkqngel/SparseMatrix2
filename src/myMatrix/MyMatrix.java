@@ -6,15 +6,36 @@ import doubleList.MyDoubleNode;
 
 import java.util.Comparator;
 
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ **/
 public class MyMatrix<TC,TR,C>{
     private DoubleListSort<MyHeader<TC,C>> cols;
     private DoubleListSort<MyHeader<TR,C>> rows;
     private Comparator<C> comparatorInfo;
+
+    /**
+     * Constructor
+     * @param sortCols
+     * @param sortRow
+     * @param comparatorInfo
+     */
     public MyMatrix(Comparator<TC> sortCols, Comparator<TR> sortRow,Comparator<C> comparatorInfo) {
         this.comparatorInfo = comparatorInfo;
         this.cols = new DoubleListSort<>((o1, o2) -> sortCols.compare(o1.getInfo(), o2.getInfo()));
         this.rows = new DoubleListSort<>((o1, o2) -> sortRow.compare(o1.getInfo(), o2.getInfo()));
     }
+
+    /**
+     * Añade un dato en una fila y columna especificada
+     * @param column columna
+     * @param row fila
+     * @param info dato
+     */
     public void add(TC column,TR row,C info) {
         MyHeader<TC,C> columnH = new MyHeader<>(column,info);
         MyHeader<TR,C> rowHeader = new MyHeader<>(row,info);
@@ -35,6 +56,13 @@ public class MyMatrix<TC,TR,C>{
             rows.add(rowHeader);
         }
     }
+
+    /**
+     * Obtiene el dato de una fila y columna especificada
+     * @param column columna
+     * @param row fila
+     * @return dato encontrado
+     */
     public C get(TC column,TR row){
         MyHeader<TC,C> col = cols.search(new MyHeader<>(column,null));
         MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row,null));

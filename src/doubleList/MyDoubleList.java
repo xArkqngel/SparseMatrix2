@@ -1,29 +1,62 @@
 package doubleList;
 
-import java.util.Comparator;
 
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ **/
 public class MyDoubleList<T> {
     protected  MyDoubleNode<T> first;
     protected  MyDoubleNode<T> last;
 
+    /**
+     * Constructor
+     */
     public MyDoubleList() {
         this.first = null;
         this.last = null;
     }
 
+    /**
+     * Obtiene el primer elemento de la lista
+     * @return
+     */
     public MyDoubleNode<T> getFirst() {
         return first;
     }
+
+    /**
+     * Obtiene el siguiente elemento de un nodo dado
+     * @param node nodo
+     * @return nodo
+     */
     public MyDoubleNode<T> getNext(MyDoubleNode<T> node){
         return node.next;
     }
+
+    /**
+     * Obtiene el ultimo elemento de la lista
+     * @return
+     */
     public MyDoubleNode<T> getLast() {
         return last;
     }
 
+    /**
+     * Verifica que la lista no este vacia
+     * @return
+     */
     public boolean isEmpty(){
         return this.first == null;
     }
+
+    /**
+     * Añade un elemento
+     * @param info
+     */
     public void add(T info){
         if (this.first != null){
             this.last = new MyDoubleNode<>(info,null, this.last);
@@ -32,6 +65,11 @@ public class MyDoubleList<T> {
             this.first =this.last = new MyDoubleNode<>(info);
         }
     }
+
+    /**
+     * Añade un nodo
+     * @param info
+     */
     public void addNode(MyDoubleNode<T> info){
         if (this.first != null){
             info.next=null;
@@ -43,6 +81,10 @@ public class MyDoubleList<T> {
         }
     }
 
+    /**
+     * Inserta un elemento
+     * @param info
+     */
     public void insert(T info){
         if (this.first == null) {
             this.first = this.last = new MyDoubleNode(info);
@@ -50,6 +92,7 @@ public class MyDoubleList<T> {
             this.first = new MyDoubleNode<>(info,this.first,null);
         }
     }
+
     public void print() {
         MyDoubleNode<T> aux = this.first;
         while (aux.next != null) {
@@ -66,6 +109,12 @@ public class MyDoubleList<T> {
         }
         System.out.println();
     }
+
+    /**
+     * Busca un nodo y retorna su informacion
+     * @param info nodo
+     * @return informacion
+     */
     public T search(MyDoubleNode info){
         if (this.last!=null&&this.last==info){
             return this.last.info;

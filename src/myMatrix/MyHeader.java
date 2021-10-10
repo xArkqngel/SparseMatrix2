@@ -22,9 +22,19 @@ public class MyHeader <T,TC>{
     public T getInfo() {
         return info;
     }
+
+    /**
+     * busca un nodo
+     * @param node
+     */
     public void search(MyDoubleNode<TC> node){
         cells.search(node);
     }
+
+    /**
+     * añade un nodo
+     * @param info
+     */
     public void add(MyDoubleNode<TC> info){
         cells.addNode(info);
     }
