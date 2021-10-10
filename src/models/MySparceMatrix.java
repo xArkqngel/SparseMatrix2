@@ -1,5 +1,7 @@
 package models;
 
+import list.SimpleList;
+
 import java.util.Comparator;
 
 
@@ -73,7 +75,7 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 		}
 	}
 
-	private boolean existCol(TC column) {
+	public boolean existCol(TC column) {
 		this.reset();
 		while (this.isInto()) {
 			if (this.getNext().getColumn().equals(column)) {

@@ -1,4 +1,4 @@
-package models;
+package list;
 
 
 public class Node <T> implements Cloneable{
