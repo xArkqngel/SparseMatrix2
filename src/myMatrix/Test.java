@@ -6,8 +6,12 @@ package myMatrix;
  * Name: Test
  *
  * @Description
- * @Author Sofia Suesca
- * @Date 9/10/2021
+ *
+ *  @Author Sofia Suesca
+ *  @Author Miguel Rubiano
+ *  @Author Martin Chiquillo
+ *  @Date 9/10/2021
+ *
  **/
 public class Test {
     public static void main(String[] args) {

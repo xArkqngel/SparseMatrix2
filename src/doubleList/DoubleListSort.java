@@ -3,11 +3,10 @@ package doubleList;
 import java.util.Comparator;
 
 /**
- * Package: doubleList
- * Name: DoubleListSort
- *
  * @Description
  * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
  * @Date 9/10/2021
  **/
 public class DoubleListSort<T> extends MyDoubleList<T> {
@@ -17,6 +16,10 @@ public class DoubleListSort<T> extends MyDoubleList<T> {
         this.comparator = comparator;
     }
 
+    /**
+     * Metodo que añade ordenadamente la informacion
+     * @param info informacion a añadir
+     */
     public void addOrder(T info){
         if (this.first ==null){
             this.first =this.last = new MyDoubleNode<>(info);
@@ -31,6 +34,12 @@ public class DoubleListSort<T> extends MyDoubleList<T> {
             node = new MyDoubleNode<T>(info,node,node.prior);
         }
     }
+
+    /**
+     * Metodo de busqueda de la información
+     * @param info informacion a buscar
+     * @return
+     */
     public T search(T info){
         if (comparator.compare(this.last.info,info)==0){
             return this.last.info;

@@ -1,5 +1,13 @@
 package doubleList;
 
+/**
+ * @Description
+ *  @Author Sofia Suesca
+ *  @Author Miguel Rubiano
+ *   @Author Martin Chiquillo
+ *   @Date 9/10/2021
+ * @param <T>
+ */
 public class MyDoubleList<T> {
     protected  MyDoubleNode<T> first;
     protected  MyDoubleNode<T> last;
@@ -17,9 +25,18 @@ public class MyDoubleList<T> {
         return last;
     }
 
+    /**
+     * Verificar si la lista esta vacía
+     * @return
+     */
     public boolean isEmpty(){
         return this.first == null;
     }
+
+    /**
+     * Añade un nuevo elemento a la lista
+     * @param info
+     */
     public void add(T info){
         if (this.first != null){
             this.last = new MyDoubleNode<>(info,null, this.last);
@@ -28,6 +45,11 @@ public class MyDoubleList<T> {
             this.first =this.last = new MyDoubleNode<>(info);
         }
     }
+
+    /**
+     * Añade un nuevo nodo a la lista
+     * @param info
+     */
     public void addNode(MyDoubleNode<T> info){
         if (this.first != null){
             this.last = info;
@@ -37,6 +59,10 @@ public class MyDoubleList<T> {
         }
     }
 
+    /**
+     * Inserta un dato a la lista
+     * @param info
+     */
     public void insert(T info){
         if (this.first == null) {
             this.first = this.last = new MyDoubleNode(info);
@@ -44,6 +70,10 @@ public class MyDoubleList<T> {
             this.first = new MyDoubleNode<>(info,this.first,null);
         }
     }
+
+    /**
+     * imprime los datos
+     */
     public void print() {
         MyDoubleNode<T> aux = this.first;
         while (aux.next != null) {
@@ -52,6 +82,10 @@ public class MyDoubleList<T> {
         }
         System.out.println();
     }
+
+    /**
+     *
+     */
     public void printBack() {
         MyDoubleNode<T> aux = this.last;
         while (aux.prior != null) {

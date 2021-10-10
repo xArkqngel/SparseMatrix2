@@ -4,7 +4,13 @@ import list.SimpleList;
 
 import java.util.Comparator;
 
-
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ */
 public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 
 	private Comparator<MyHeader<TC, TR, C>> sortCols;
@@ -31,7 +37,12 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 	}
 
 
-
+	/**
+	 * Metodo para obtener el dato de una fila y una columna especifica
+	 * @param row fila
+	 * @param column columna
+	 * @return dato encontrado
+	 */
 	public C get(TR row, TC column) {
 		this.reset();
 		while (this.isInto()) {
@@ -50,7 +61,13 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 		return null;
 	}
 
-	
+	/**
+	 * Metodo para añadir un dato en una fila y una columna especificada
+	 * @param row fila
+	 * @param column columna
+	 * @param info dato a añadir
+	 * @return resultado de la operacion
+	 */
 	public boolean set(TR row, TC column, C info) {
 		if (existCol(column)) {
 			if (get(row, column) == null) {
@@ -64,7 +81,12 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 		return false;
 	}
 
-
+	/**
+	 * Metodo para añadir una nueva fila
+	 * @param row
+	 * @param column
+	 * @param info
+	 */
 	private void addRow(TR row, TC column, C info) {
 		this.reset();
 		while (this.isInto()) {
@@ -75,6 +97,11 @@ public class MySparceMatrix<TC, TR, C> extends SimpleList<MyHeader<TC, TR, C>> {
 		}
 	}
 
+	/**
+	 *
+	 * @param column
+	 * @return
+	 */
 	public boolean existCol(TC column) {
 		this.reset();
 		while (this.isInto()) {
