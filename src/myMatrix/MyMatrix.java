@@ -2,6 +2,7 @@ package myMatrix;
 
 
 import doubleList.DoubleListSort;
+import doubleList.MyDoubleNode;
 import list.SimpleList;
 import list.SimpleListSort;
 
@@ -21,24 +22,22 @@ public class MyMatrix<TC,TR,C>{
         this.rows = new DoubleListSort<>((o1, o2) -> sortRow.compare(o1.getInfo(), o2.getInfo()));
     }
     public void add(TC column,TR row,C info) {
-        MyHeader<TC,C> col = cols.search(new MyHeader<>(column,info));
-        MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row,info));
+        MyHeader<TC,C> columnH = new MyHeader<>(column,info);
+        MyHeader<TR,C> rowHeader = new MyHeader<>(row,info);
+        MyHeader<TC,C> col = cols.search(columnH);
+        MyHeader<TR,C> rowH = rows.search(rowHeader);
         if (col!=null && rowH!=null){
-
-        }else if(){
-
-        }else if (){
-
+            col.add(info);
+            rowH.add(info);
+        }else if(col==null && rowH!=null){
+            cols.add(columnH);
+            rowH.add(info);
+        }else if (col!=null && rowH==null){
+            rows.add(rowHeader);
+            col.add(info);
         }else {
-            if (cols.getFirst().getInfo()==null){
-                MyHeader<TC,C> colsCells = new MyHeader<TC,C>(column);
-                colsCells.add(info);
-                cols.add(colsCells);
-            }else if (rows.getFirst().getInfo()== null){
-                MyHeader<TR,C> rowsCells = new MyHeader<TR,C>(row);
-                rowsCells.add(info);
-                rows.add(rowsCells);
-            }
+            cols.add(columnH);
+            rows.add(rowHeader);
         }
     }
     public void insert(TC column,TR row,C info) {

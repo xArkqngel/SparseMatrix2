@@ -28,6 +28,14 @@ public class MyDoubleList<T> {
             this.first =this.last = new MyDoubleNode<>(info);
         }
     }
+    public void addNode(MyDoubleNode<T> info){
+        if (this.first != null){
+            this.last = info;
+            this.last.prior.next = last;
+        }else {
+            this.first =this.last =info;
+        }
+    }
 
     public void insert(T info){
         if (this.first == null) {

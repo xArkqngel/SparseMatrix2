@@ -22,9 +22,6 @@ public class SimpleList<T> {
 	public void addHead(T info){
 		this.header = new Node<>(info);
 	}
-	public void addNext(Node<T> aux,T info){
-
-	}
 
 	public void add(T item) {
 		if (header == null) {
