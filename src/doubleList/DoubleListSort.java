@@ -20,9 +20,11 @@ public class DoubleListSort<T> extends MyDoubleList<T> {
      * Metodo que añade ordenadamente la informacion
      * @param info informacion a añadir
      */
+
     public void addOrder(T info){
         if (this.first ==null){
             this.first =this.last = new MyDoubleNode<>(info);
+
         }else if(comparator.compare(this.last.getInfo(),info)>0){
             this.last = new MyDoubleNode<>(info,null, this.last);
             this.last.prior.next = last;
@@ -33,6 +35,25 @@ public class DoubleListSort<T> extends MyDoubleList<T> {
             }
             node = new MyDoubleNode<T>(info,node,node.prior);
         }
+    }
+
+    public void insertionSort(){
+        MyDoubleNode<T> front = this.first;
+        MyDoubleNode<T> back = null;
+        while (front!=null){
+            back=front.next;
+            while (back!= null && back.prior != null && comparator.compare(back.info,back.prior.info)<0){
+                swapData(back,back.prior);
+                back = back.prior;
+            }
+            front = front.next;
+        }
+    }
+
+    public void swapData(MyDoubleNode<T> first, MyDoubleNode<T> second){
+        T value = first.info;
+        first.info = second.info;
+        second.info = value;
     }
 
     /**

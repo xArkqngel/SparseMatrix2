@@ -28,15 +28,15 @@ public class Test {
             }
         });
 
-        matrix.add(333F,123F,"1");
-        matrix.add(1F,123F,"S2S");
-        matrix.add(332F,123F,"S3S");
-        matrix.add(12F,132F,"S4S");
-        matrix.add(332F,124F,"S5S");
-        matrix.add(1F,124F,"ambos");
+        matrix.add(333F,123F,"1 nono");
+        matrix.add(1F,123F,"S2S no col");
+        matrix.add(332F,123F,"S3S no col");//
+        matrix.add(12F,132F,"S4S nono");
+        matrix.add(332F,124F,"S5S no row");//
+        matrix.add(1F,124F,"ambos");//
 
 //		matrix.test();
-        System.out.println( matrix.get(1F,123F));
+        System.out.println( matrix.get(332F,123F));
 
 //        System.out.println(matrix.numberOfElementsIntoRectangularArea(331F,340F,122F,140F));
 //        System.out.println(matrix.numberInCircualArea(330F,120F,100));

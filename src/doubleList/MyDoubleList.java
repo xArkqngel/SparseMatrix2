@@ -68,6 +68,8 @@ public class MyDoubleList<T> {
         }
     }
 
+
+
     /**
      * Añade un nodo
      * @param info
@@ -145,6 +147,9 @@ public class MyDoubleList<T> {
         }
         return null;
     }
+
+
+
     public boolean remove(T info){
         String infoS = info.toString();
         boolean result = false;

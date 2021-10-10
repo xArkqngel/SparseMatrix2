@@ -39,30 +39,33 @@ public class MyMatrix<TC,TR,C>{
     public void add(TC column,TR row,C info) {
         MyHeader<TC,C> columnH = new MyHeader<>(column);
         MyHeader<TR,C> rowHeader = new MyHeader<>(row);
-        MyHeader<TC,C> col = cols.search(columnH);
-        MyHeader<TR,C> rowH = rows.search(rowHeader);
+        MyHeader<TC,C> colSearch = cols.search(columnH);
+        MyHeader<TR,C> rowSearch = rows.search(rowHeader);
         MyDoubleNode<C> node = new MyDoubleNode<>(info);
-        if (col!=null && rowH!=null){
-            col.add(node);
-            rowH.add(node);
-        }else if(col==null && rowH!=null){
+        if (colSearch!=null && rowSearch!=null){
+            colSearch.add(node);
+            rowSearch.add(node);
+            System.out.println(node.getInfo()+" ambos");
+        }else if(colSearch==null && rowSearch!=null){
+            columnH.add(node);
             cols.add(columnH);
-            cols.search(columnH).add(node);
-            rowH.add(node);
-            System.out.println(cols.getLast().getInfo().cells.getLast().getInfo()+" no cols");
-        }else if (col!=null && rowH==null){
+            rowSearch.add(node);
+            System.out.println(node.getInfo()+" no cols");
+        }else if (colSearch!=null && rowSearch==null){
+            rowHeader.add(node);
             rows.add(rowHeader);
-            rows.search(rowHeader).add(node);
-            col.add(node);
-            System.out.println(rows.getLast().getInfo().cells.getLast().getInfo()+" no rows");
+            colSearch.add(node);
+            System.out.println(node.getInfo()+" no rows");
         }else {
+            columnH.add(node);
             cols.add(columnH);
-            cols.search(columnH).add(node);
+            rowHeader.add(node);
             rows.add(rowHeader);
-            rows.search(rowHeader).add(node);
-            System.out.println(cols.getFirst().getInfo().cells.getLast().getInfo()+" nono");
-
+            System.out.println(node.getInfo()+" nono");
+            cols.insertionSort();
+            rows.insertionSort();
         }
+
     }
 
     /**
@@ -72,11 +75,11 @@ public class MyMatrix<TC,TR,C>{
      * @return dato encontrado
      */
     public C get(TC column,TR row){
-        MyHeader<TC,C> col = cols.search(new MyHeader<>(column));
-        MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row));
-        if (col!=null&&rowH!=null){
-            MyDoubleNode<C> aux = col.cells.getFirst();
-            MyDoubleNode<C> auxR = rowH.cells.getFirst();
+        MyHeader<TC,C> colSearch = cols.search(new MyHeader<>(column));
+        MyHeader<TR,C> rowSearch = rows.search(new MyHeader<>(row));
+        if (colSearch!=null&&rowSearch!=null){
+            MyDoubleNode<C> aux = colSearch.cells.getFirst();
+            MyDoubleNode<C> auxR = rowSearch.cells.getFirst();
             while (aux!=null){
                 while (auxR!=null){
                     if (comparatorInfo.compare(aux.getInfo(), auxR.getInfo())==0){
@@ -89,6 +92,7 @@ public class MyMatrix<TC,TR,C>{
         }
         return null;
     }
+
     public void set(TC column,TR row,C info){
         MyHeader<TC,C> col = cols.search(new MyHeader<>(column));
         MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row));
