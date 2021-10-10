@@ -1,13 +1,7 @@
 package doubleList;
 
-/**
- * @Description
- *  @Author Sofia Suesca
- *  @Author Miguel Rubiano
- *   @Author Martin Chiquillo
- *   @Date 9/10/2021
- * @param <T>
- */
+import java.util.Comparator;
+
 public class MyDoubleList<T> {
     protected  MyDoubleNode<T> first;
     protected  MyDoubleNode<T> last;
@@ -20,23 +14,16 @@ public class MyDoubleList<T> {
     public MyDoubleNode<T> getFirst() {
         return first;
     }
-
+    public MyDoubleNode<T> getNext(MyDoubleNode<T> node){
+        return node.next;
+    }
     public MyDoubleNode<T> getLast() {
         return last;
     }
 
-    /**
-     * Verificar si la lista esta vacía
-     * @return
-     */
     public boolean isEmpty(){
         return this.first == null;
     }
-
-    /**
-     * Añade un nuevo elemento a la lista
-     * @param info
-     */
     public void add(T info){
         if (this.first != null){
             this.last = new MyDoubleNode<>(info,null, this.last);
@@ -45,13 +32,10 @@ public class MyDoubleList<T> {
             this.first =this.last = new MyDoubleNode<>(info);
         }
     }
-
-    /**
-     * Añade un nuevo nodo a la lista
-     * @param info
-     */
     public void addNode(MyDoubleNode<T> info){
         if (this.first != null){
+            info.next=null;
+            info.prior=this.getLast();
             this.last = info;
             this.last.prior.next = last;
         }else {
@@ -59,10 +43,6 @@ public class MyDoubleList<T> {
         }
     }
 
-    /**
-     * Inserta un dato a la lista
-     * @param info
-     */
     public void insert(T info){
         if (this.first == null) {
             this.first = this.last = new MyDoubleNode(info);
@@ -70,10 +50,6 @@ public class MyDoubleList<T> {
             this.first = new MyDoubleNode<>(info,this.first,null);
         }
     }
-
-    /**
-     * imprime los datos
-     */
     public void print() {
         MyDoubleNode<T> aux = this.first;
         while (aux.next != null) {
@@ -82,10 +58,6 @@ public class MyDoubleList<T> {
         }
         System.out.println();
     }
-
-    /**
-     *
-     */
     public void printBack() {
         MyDoubleNode<T> aux = this.last;
         while (aux.prior != null) {
@@ -93,6 +65,20 @@ public class MyDoubleList<T> {
             aux = aux.prior;
         }
         System.out.println();
+    }
+    public T search(MyDoubleNode info){
+        if (this.last!=null&&this.last==info){
+            return this.last.info;
+        }else {
+            MyDoubleNode<T> aux = this.first;
+            while (aux!=null&&aux!=info){
+                aux = aux.next;
+            }
+            if (aux==info){
+                return aux.info;
+            }
+        }
+        return null;
     }
     public boolean remove(T info){
         String infoS = info.toString();
