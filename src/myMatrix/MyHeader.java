@@ -14,8 +14,6 @@ public class MyHeader <T,TC>{
     public T getInfo() {
         return info;
     }
-
-
     public void add(TC info){
         cells.add(info);
     }

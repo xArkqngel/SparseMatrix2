@@ -2,22 +2,18 @@ package myMatrix;
 
 
 import doubleList.DoubleListSort;
-import doubleList.MyDoubleNode;
-import list.SimpleList;
-import list.SimpleListSort;
 
 import java.util.Comparator;
 
-/*
- * 1. revisar la estructura -- Solucion
- * 2. reducir la complejidad tiempo --> modificando
- * */
 public class MyMatrix<TC,TR,C>{
     private DoubleListSort<MyHeader<TC,C>> cols;
     private DoubleListSort<MyHeader<TR,C>> rows;
-
+    private Comparator<TC> sortCols;
+    private Comparator<TR> sortRow;
 
     public MyMatrix(Comparator<TC> sortCols, Comparator<TR> sortRow) {
+        this.sortCols = sortCols;
+        this.sortRow = sortRow;
         this.cols = new DoubleListSort<>((o1, o2) -> sortCols.compare(o1.getInfo(), o2.getInfo()));
         this.rows = new DoubleListSort<>((o1, o2) -> sortRow.compare(o1.getInfo(), o2.getInfo()));
     }
@@ -40,9 +36,11 @@ public class MyMatrix<TC,TR,C>{
             rows.add(rowHeader);
         }
     }
-    public void insert(TC column,TR row,C info) {
-    }
     public C get(TC column,TR row){
+        MyHeader<TC,C> col = cols.search(new MyHeader<>(column,null));
+        MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row,null));
+        if (col!=null&&rowH!=null){
+        }
         return null;
     }
     public void set(TC column,TR row,C info){
