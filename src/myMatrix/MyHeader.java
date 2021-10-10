@@ -3,13 +3,8 @@ package myMatrix;
 import doubleList.MyDoubleList;
 import doubleList.MyDoubleNode;
 
-/**
- * @Description
- * @Author Sofia Suesca
- * @Author Miguel Rubiano
- * @Author Martin Chiquillo
- * @Date 9/10/2021
- **/
+import java.util.Comparator;
+
 public class MyHeader <T,TC>{
     private T info;
     protected MyDoubleList<TC> cells;
@@ -22,19 +17,15 @@ public class MyHeader <T,TC>{
     public T getInfo() {
         return info;
     }
-
-    /**
-     * busca un nodo
-     * @param node
-     */
     public void search(MyDoubleNode<TC> node){
         cells.search(node);
     }
-
-    /**
-     * añade un nodo
-     * @param info
-     */
+    public MyDoubleNode<TC> searchInfo(Comparator<TC> info){
+        return cells.searchInfo(info);
+    }
+    public void setInfoCell(Comparator<TC> infoCell,TC info){
+        cells.searchInfo(infoCell).setInfo(info);
+    }
     public void add(MyDoubleNode<TC> info){
         cells.addNode(info);
     }

@@ -82,6 +82,12 @@ public class MyMatrix<TC,TR,C>{
         return null;
     }
     public void set(TC column,TR row,C info){
-
+        MyHeader<TC,C> col = cols.search(new MyHeader<>(column,null));
+        MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row,null));
+        if (col!=null&&rowH!=null){
+            MyDoubleNode<C> node = col.cells.searchInfo((o1, o2) -> comparatorInfo.compare(o1,info));
+            node.setInfo(info);
+            rowH.cells.search(node).setInfo(info);
+        }
     }
 }

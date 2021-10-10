@@ -1,6 +1,8 @@
 package doubleList;
 
 
+import java.util.Comparator;
+
 /**
  * @Description
  * @Author Sofia Suesca
@@ -115,16 +117,30 @@ public class MyDoubleList<T> {
      * @param info nodo
      * @return informacion
      */
-    public T search(MyDoubleNode info){
+    public MyDoubleNode<T> searchInfo(Comparator<T> info){
+        if (this.last!=null&&info.compare(this.last.info,this.last.info)==0){
+            return this.last;
+        }else {
+            MyDoubleNode<T> aux = this.first;
+            while (aux!=null&&info.compare(this.last.info,this.last.info)!=0){
+                aux = aux.next;
+            }
+            if (info.compare(this.last.info,this.last.info)==0){
+                return aux;
+            }
+        }
+        return null;
+    }
+    public MyDoubleNode<T> search(MyDoubleNode info){
         if (this.last!=null&&this.last==info){
-            return this.last.info;
+            return this.last;
         }else {
             MyDoubleNode<T> aux = this.first;
             while (aux!=null&&aux!=info){
                 aux = aux.next;
             }
             if (aux==info){
-                return aux.info;
+                return aux;
             }
         }
         return null;

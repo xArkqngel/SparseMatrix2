@@ -40,4 +40,8 @@ public class      MyDoubleNode<T> {
     public T getInfo() {
         return info;
     }
+
+    public void setInfo(T info) {
+        this.info = info;
+    }
 }
