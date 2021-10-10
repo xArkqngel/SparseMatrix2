@@ -9,7 +9,7 @@ public class MyHeader <T,TC>{
     private T info;
     protected MyDoubleList<TC> cells;
 
-    public MyHeader(T info,TC cells) {
+    public MyHeader(T info) {
         this.info = info;
         this.cells = new MyDoubleList<>();
     }
