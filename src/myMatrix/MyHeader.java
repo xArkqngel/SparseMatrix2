@@ -1,6 +1,7 @@
 package myMatrix;
 
 import doubleList.MyDoubleList;
+import doubleList.MyDoubleNode;
 
 public class MyHeader <T,TC>{
     private T info;
@@ -14,7 +15,10 @@ public class MyHeader <T,TC>{
     public T getInfo() {
         return info;
     }
-    public void add(TC info){
-        cells.add(info);
+    public void search(MyDoubleNode<TC> node){
+        cells.
+    }
+    public void add(MyDoubleNode<TC> info){
+        cells.addNode(info);
     }
 }

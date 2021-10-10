@@ -1,5 +1,7 @@
 package doubleList;
 
+import java.util.Comparator;
+
 public class MyDoubleList<T> {
     protected  MyDoubleNode<T> first;
     protected  MyDoubleNode<T> last;
@@ -30,6 +32,8 @@ public class MyDoubleList<T> {
     }
     public void addNode(MyDoubleNode<T> info){
         if (this.first != null){
+            info.next=null;
+            info.prior=this.getLast();
             this.last = info;
             this.last.prior.next = last;
         }else {
@@ -59,6 +63,20 @@ public class MyDoubleList<T> {
             aux = aux.prior;
         }
         System.out.println();
+    }
+    public T search(Comparator<T> comparator){
+        if (comparator.compare(this.last.info,this.last.info)==0){
+            return this.last.info;
+        }else {
+            MyDoubleNode<T> aux = this.first;
+            while (aux!=null&&comparator.compare(aux.info, this.last.info)!=0){
+                aux = aux.next;
+            }
+            if (comparator.compare(aux.info,this.last.info)==0){
+                return aux.info;
+            }
+        }
+        return null;
     }
     public boolean remove(T info){
         String infoS = info.toString();
