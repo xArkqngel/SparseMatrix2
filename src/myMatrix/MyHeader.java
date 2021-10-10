@@ -5,7 +5,7 @@ import doubleList.MyDoubleNode;
 
 public class MyHeader <T,TC>{
     private T info;
-    private MyDoubleList<TC> cells;
+    protected MyDoubleList<TC> cells;
 
     public MyHeader(T info,TC cells) {
         this.info = info;
@@ -16,7 +16,7 @@ public class MyHeader <T,TC>{
         return info;
     }
     public void search(MyDoubleNode<TC> node){
-        cells.
+        cells.search(node);
     }
     public void add(MyDoubleNode<TC> info){
         cells.addNode(info);

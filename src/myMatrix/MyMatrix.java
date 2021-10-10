@@ -39,7 +39,17 @@ public class MyMatrix<TC,TR,C>{
         MyHeader<TC,C> col = cols.search(new MyHeader<>(column,null));
         MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row,null));
         if (col!=null&&rowH!=null){
-
+            MyDoubleNode<C> aux = col.cells.getFirst();
+            MyDoubleNode<C> auxR = rowH.cells.getFirst();
+            while (aux!=null){
+                while (auxR!=null){
+                    if (comparatorInfo.compare(aux.getInfo(), auxR.getInfo())==0){
+                        return auxR.getInfo();
+                    }
+                    auxR = auxR.getNext();
+                }
+                aux = aux.getNext();
+            }
         }
         return null;
     }

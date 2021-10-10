@@ -15,6 +15,10 @@ public class MyDoubleNode<T> {
         this.prior = prior;
     }
 
+    public MyDoubleNode<T> getNext() {
+        return next;
+    }
+
     public T getInfo() {
         return info;
     }

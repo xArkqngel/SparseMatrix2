@@ -14,7 +14,9 @@ public class MyDoubleList<T> {
     public MyDoubleNode<T> getFirst() {
         return first;
     }
-
+    public MyDoubleNode<T> getNext(MyDoubleNode<T> node){
+        return node.next;
+    }
     public MyDoubleNode<T> getLast() {
         return last;
     }
@@ -64,15 +66,15 @@ public class MyDoubleList<T> {
         }
         System.out.println();
     }
-    public T search(Comparator<T> comparator){
-        if (comparator.compare(this.last.info,this.last.info)==0){
+    public T search(MyDoubleNode info){
+        if (this.last!=null&&this.last==info){
             return this.last.info;
         }else {
             MyDoubleNode<T> aux = this.first;
-            while (aux!=null&&comparator.compare(aux.info, this.last.info)!=0){
+            while (aux!=null&&aux!=info){
                 aux = aux.next;
             }
-            if (comparator.compare(aux.info,this.last.info)==0){
+            if (aux==info){
                 return aux.info;
             }
         }
