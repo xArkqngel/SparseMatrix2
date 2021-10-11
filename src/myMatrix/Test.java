@@ -35,7 +35,7 @@ public class Test {
         matrix.add(1F,126F,"8 no row");//
         matrix.add(334F,132F,"9 no col");
 
-//		matrix.test();
+
         System.out.println( matrix.get(332F,124F));
         System.out.println( matrix.get(334F,132F));
         matrix.set(332F,124F, "PELEO");

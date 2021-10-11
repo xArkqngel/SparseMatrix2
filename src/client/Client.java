@@ -38,16 +38,7 @@ public class Client  {
      */
     public void startConnection() throws IOException {
         new Thread(clientRun).start();
-        /**do {
-            System.out.println("Envie su ID");
-            userInput = scanner.nextLine();
-            output.writeUTF(userInput);
-            System.out.println(userInput +"   |||||Esto es el UserInput");
-            if (userInput.equals("SALIR")){
-                input.close();
-                break;
-            }
-        }while (true);*/
+
 
     }
 

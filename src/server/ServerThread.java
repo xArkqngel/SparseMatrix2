@@ -179,6 +179,11 @@ public class ServerThread extends Thread {
 
     }
 
+    /**
+     * MEtodo que me retorna la pos de un array list mediante la busqueda de un parametro
+     * @param name El nombre a buscar
+     * @return La pos del array
+     */
     public int returnPosArray(String  name){
 
         for (int i = 0; i < this.pokemons.size(); i++) {
@@ -190,7 +195,10 @@ public class ServerThread extends Thread {
 
     }
 
-
+    /**
+     * Metodo que me muestra el menu
+     * @return El menu
+     */
     public String menu() {
         return "-------------------------Bienvenido a Pokemon GO-------------------------\n" +
                 "" +
@@ -213,19 +221,19 @@ public class ServerThread extends Thread {
         });
         ArrayList<Pokemon> pokemonsNews = new ArrayList<>();
         pokemons = JsonFileManager.readFile("src/data/pokedex.json");
-        System.out.println(pokemons.size());
+
         for (Pokemon pokemon : pokemons) {
-            System.out.println(pokemon);
             float aux1 = this.random() * 100;
             float aux2 = this.random() * 100;
-            System.out.println("Aux1-->" + aux1 + ',' + "Aux 2--->" + aux2);
             matrix2.add(aux1, aux2, pokemon);
 
         }
-        System.out.println("CAMBIADOOSSSS");
+
         this.matrix = matrix2;
     }
-
+    /**
+     * Metodo que agrega de json a arraylist
+     */
     public void addPokemons() {
         ArrayList<Pokemon> pokemons2 = new ArrayList<>();
         this.pokemons = JsonFileManager.readFile("src/data/pokedex.json");
@@ -241,9 +249,10 @@ public class ServerThread extends Thread {
     }
 
 
-
-
-
+    /**
+     * Metodo que retorna un random
+     * @return El random
+     */
     public float random() {
         return (float) Math.random();
     }

@@ -137,12 +137,5 @@ public class ClientThread implements Runnable{
         }
     }
 
-    public void sendId(String id) throws IOException {
-        System.out.println("Dentro del metodo SendId " + id);
-        this.output.writeUTF(id);
-    }
 
-    public float manageIncomToFloat(String incom){
-        return Float.parseFloat(incom);
-    }
 }
