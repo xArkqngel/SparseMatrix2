@@ -101,7 +101,7 @@ public class ServerThread extends Thread {
                     case 2:
 
                         ArrayList<Pokemon> auxPokemons = this.matrix.numberInCircualArea(longitud, latitud, this.radio);
-                        String newInfo = " ";
+                        String newInfo = "";
                         for (Pokemon pokemon : auxPokemons) {
                             newInfo += "Pokemon encontrado -->" + pokemon.toString() + "\n";
                         }
@@ -134,8 +134,11 @@ public class ServerThread extends Thread {
                             String pokemon = nearPokemons.get(option - 1).toString();
                             this.dataOutputStream.writeUTF(pokemon);
 
+                            this.matrix.delete( this.matrix.searchColumn(nearPokemons.get(option-1)),this.matrix.searchRow(nearPokemons.get(option-1)),nearPokemons.get(option-1));
+                            String out2 = " Dato -> " + this.matrix.get(this.matrix.searchColumn(nearPokemons.get(option-1)), this.matrix.searchRow(nearPokemons.get(option-1))).toString();
+                            System.out.println("OUT 2" + out2);
                         }
-                        //nearPokemons.remove(option-1);
+
 
                         break;
                     case 6:
