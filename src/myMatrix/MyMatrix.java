@@ -79,8 +79,8 @@ public class MyMatrix<TC,TR,C>{
         MyHeader<TR,C> rowSearch = rows.search(new MyHeader<>(row));
         if (colSearch!=null&&rowSearch!=null){
             MyDoubleNode<C> aux = colSearch.cells.getFirst();
-            MyDoubleNode<C> auxR = rowSearch.cells.getFirst();
             while (aux!=null){
+                MyDoubleNode<C> auxR = rowSearch.cells.getFirst();
                 while (auxR!=null){
                     if (comparatorInfo.compare(aux.getInfo(), auxR.getInfo())==0){
                         return auxR.getInfo();
