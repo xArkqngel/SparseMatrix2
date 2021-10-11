@@ -220,7 +220,7 @@ public class ServerThread extends Thread {
             }
         });
         ArrayList<Pokemon> pokemonsNews = new ArrayList<>();
-        pokemons = JsonFileManager.readFile("src/data/pokedex.json");
+        pokemons = JsonFileManager.readFile("data/pokedex.json");
 
         for (Pokemon pokemon : pokemons) {
             float aux1 = this.random() * 100;
@@ -236,7 +236,7 @@ public class ServerThread extends Thread {
      */
     public void addPokemons() {
         ArrayList<Pokemon> pokemons2 = new ArrayList<>();
-        this.pokemons = JsonFileManager.readFile("src/data/pokedex.json");
+        this.pokemons = JsonFileManager.readFile("data/pokedex.json");
 
         for (Pokemon pokemon : pokemons) {
 
