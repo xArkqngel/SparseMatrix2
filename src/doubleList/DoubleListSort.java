@@ -64,7 +64,11 @@ public class DoubleListSort<T> extends MyDoubleList<T> {
         }
         return null;
     }
-
+    /**
+     * Metodo que busca un nodo con una informacion igual al parametro info
+     * @param info informacion a buscar
+     * @return MyDoubleNode<T> nodo con esa informacion o null
+     */
     public MyDoubleNode<T> searchNode(T info){
         if (this.last!=null&&comparator.compare(this.last.info,info)==0){
             return this.last;
