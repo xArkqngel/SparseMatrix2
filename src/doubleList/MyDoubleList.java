@@ -115,6 +115,11 @@ public class MyDoubleList<T> {
         }
         return null;
     }
+    /**
+     * Metodo que busca un nodo
+     * @param info nodo a buscar
+     * @return MyDoubleNode<T> nodo encontrado o null
+     */
     public MyDoubleNode<T> search(MyDoubleNode info){
         if (this.last!=null&&this.last==info){
             return this.last;
@@ -131,7 +136,11 @@ public class MyDoubleList<T> {
     }
 
 
-
+    /**
+     * Metodo que borra un nodo
+     * @param comparator comparador de tipo T
+     * @param info informacion de tipo T a buscar
+     */
     public void remove(Comparator<T> comparator,T info){
         if ((isEmpty())){
         }
