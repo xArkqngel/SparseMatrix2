@@ -57,13 +57,25 @@ public class ServerThread extends Thread{
                     case 1:
                         //TC TR Info
                         // Float Float String
+                        Float aux1 = (Float)this.dataInputStream.readFloat();
+                        Float aux2 = (Float)this.dataInputStream.readFloat();
                         String info = this.dataInputStream.readUTF();
-                        this.matrix.add( (Float)this.dataInputStream.readFloat(),(Float)this.dataInputStream.readFloat(),info);
+                        this.matrix.add( aux1,aux2,info);
                         break;
                     case 2:
 
                         String out = this.matrix.get((Float)this.dataInputStream.readFloat(),(Float)this.dataInputStream.readFloat());
                         this.dataOutputStream.writeUTF("Dato encontrado --> " + out);
+                        break;
+                    case 3:
+                        Float aux3 = (Float)this.dataInputStream.readFloat();
+                        Float aux4 = (Float)this.dataInputStream.readFloat();
+                        String infoToChange = this.dataInputStream.readUTF();
+                        System.out.println(aux3+ "," + aux4 + infoToChange);
+                        this.matrix.set(aux3,aux4,infoToChange);
+                        String newInfo = "Modificado --> " + this.matrix.get(aux3,aux4);
+                        this.dataOutputStream.writeUTF(newInfo);
+                        break;
 
                 }
             }while (opcionEntrada!=8);

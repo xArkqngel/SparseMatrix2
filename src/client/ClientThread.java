@@ -48,7 +48,7 @@ public class ClientThread implements Runnable{
                 // Envio la opcion
                 switch (choice){
                     case 1:
-                        System.out.println("--- Esogiste la opcion 1 ---\n  Ingrese la columna especificada");
+                        System.out.println("--- Esogiste la opcion 1 ---\nIngrese la columna especificada");
                         this.output.writeFloat(this.scanner.nextFloat());
                         System.out.println("Ingrese la fila ");
                         this.output.writeFloat(this.scanner.nextFloat());
@@ -57,7 +57,7 @@ public class ClientThread implements Runnable{
                         this.output.writeUTF(info);
                         break;
                     case 2:
-                        System.out.println("--- Esogiste la opcion 2 ---\n  Ingrese la columna especificada");
+                        System.out.println("--- Esogiste la opcion 2 ---\nIngrese la columna especificada");
                         this.output.writeFloat(this.scanner.nextFloat());
                         System.out.println("Ingrese la fila ");
                         this.output.writeFloat(this.scanner.nextFloat());
@@ -65,6 +65,16 @@ public class ClientThread implements Runnable{
                         System.out.println(received);
                         break;
                     case 3:
+                        System.out.println("--- Esogiste la opcion 3 ---\nIngrese la columna especificada");
+                        this.output.writeFloat(this.scanner.nextFloat());
+                        System.out.println("Ingrese la fila ");
+                        this.output.writeFloat(this.scanner.nextFloat());
+                        System.out.println("Ingrese la nueva info de esa celda");
+                        String newInfo = this.scanner.next();
+                        this.output.writeUTF(newInfo);
+                        String received2 = this.inputStream.readUTF();
+                        System.out.println(received2);
+                        break;
 
                 }
 
