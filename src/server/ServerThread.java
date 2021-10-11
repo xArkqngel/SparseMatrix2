@@ -61,21 +61,21 @@ public class ServerThread extends Thread{
 
                  opcionEntrada = dataInputStream.readInt();
                 switch (opcionEntrada){
-                    /**
-                    case 1:
+
+                    /*+case 1:
                         //TC TR Info
                         // Float Float String
                         Float aux1 = (Float)this.dataInputStream.readFloat();
                         Float aux2 = (Float)this.dataInputStream.readFloat();
                         String info = this.dataInputStream.readUTF();
                         this.matrix.add( aux1,aux2,info);
-                        break;
-                    case 2:
+                        break;*/
+                    case 1:
 
-                        String out = this.matrix.get((Float)this.dataInputStream.readFloat(),(Float)this.dataInputStream.readFloat());
+                        String out = this.matrix.get((Float)this.dataInputStream.readFloat(),(Float)this.dataInputStream.readFloat()).toString();
                         this.dataOutputStream.writeUTF("Dato encontrado --> " + out);
                         break;
-                    case 3:
+                    case 2:
                         Float aux3 = (Float)this.dataInputStream.readFloat();
                         Float aux4 = (Float)this.dataInputStream.readFloat();
                         String infoToChange = this.dataInputStream.readUTF();
@@ -83,21 +83,21 @@ public class ServerThread extends Thread{
                         String newInfo = "Modificado --> " + this.matrix.get(aux3,aux4);
                         this.dataOutputStream.writeUTF(newInfo);
                         break;
-                    case 4:
+                    case 3:
                         Float aux5 = (Float)this.dataInputStream.readFloat();
                         Float aux6 = (Float)this.dataInputStream.readFloat();
                         String infoToDelete = this.dataInputStream.readUTF();
-                        this.matrix.delete(aux5,aux6,infoToDelete);
+                        this.matrix.delete(aux5,aux6,this.matrix.get(aux5,aux6));
                         String outDelete = "Dato --> " + this.matrix.get(aux5,aux6);
                         this.dataOutputStream.writeUTF(outDelete);
                         System.out.println(outDelete);
                         break;
-                    case 5:
-                     */
+                    case 4:
+
 
 
                 }
-            }while (opcionEntrada!=8);
+            }while (opcionEntrada!=7);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -110,27 +110,17 @@ public class ServerThread extends Thread{
 
     public String menu(){
         return  "-------------------------Bienvenido a Pokemon GO-------------------------\n"+
-                "1. Añadir un dato en una fila y columna especificada\n" +
-                "2. Obtener el dato de una fila y columna especificada\n" +
-                "3. Modificar un pokemon \n" +
-                "4. Borrar un dato en una columna, fila y con el valor del dato\n" +
-                "5. Encontrar la cantidad de elementos dentro de un area rectangular\n"+
-                "6. Encontrar la cantidad de elementos dentro de un area circular\n"+
-                "7. Encontrar la distancia entre dos elementos\n"+
-                "8. Salir";
+                "" +
+                "1. Obtener el dato de un Pokemon con su ubicacion\n" +
+                "2. \n" +
+                "3. " +
+                "4. Encontrar la cantidad de elementos dentro de un area rectangular\n"+
+                "5. Encontrar la cantidad de pokemons cerca a ti, en un radio circular\n"+
+                "6. Encontrar la distancia entre el usuario -> " + this.userId + "y un pokemon \n"+
+                "7. Salir";
     }
 
-    public void handle(int option){
-        switch (option){
-            case 1:
-                System.out.println("Sirve case 1");
-                break;
-            case 2:
-            default:
-                break;
 
-        }
-    }
 
     public void addPokemons(){
         ArrayList <Pokemon> pokemons =  new ArrayList<>();
@@ -138,7 +128,10 @@ public class ServerThread extends Thread{
         System.out.println(pokemons.size());
         for (Pokemon pokemon: pokemons) {
             System.out.println(pokemon);
-            this.matrix.add(this.random(),this.random(), pokemon);
+            float aux1 = this.random()*10;
+            float aux2 = this.random()*10;
+            System.out.println("Aux1-->" + aux1 +',' + "Aux 2--->" + aux2);
+            this.matrix.add(aux1,aux2, pokemon);
 
         }
     }
