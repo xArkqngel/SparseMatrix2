@@ -35,11 +35,7 @@ public class JsonFileManager {
 				int id = Integer.parseInt(jsonObject.getString("id"));
 				JsonObject jsonName = (JsonObject)jsonObject.get("name");
 				String name = String.valueOf(jsonName.get("english"));
-				JsonArray jsonType =  (JsonArray) jsonObject.get("type");
-				String type = String.valueOf(jsonType.get(0));
-				JsonObject jsonBase = (JsonObject)jsonObject.get("base");
-				int attack = Integer.parseInt(String.valueOf(jsonBase.get("Attack")));
-				list.add(new Pokemon(id,name,type,attack));
+				list.add(new Pokemon(id,name));
 			}
 		}catch(DeserializationException |IOException e) {
 			e.printStackTrace();
