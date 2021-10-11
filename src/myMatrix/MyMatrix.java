@@ -92,7 +92,12 @@ public class MyMatrix<TC,TR,C>{
         }
         return null;
     }
-
+    /**
+     * Metodo que cambia la informacion de la celda en un fla y una columna
+     * @param column columna en la que esta la celda
+     * @param row fila en la que esta la celda
+     * @param info informacion nueva
+     */
     public void set(TC column,TR row,C info){
         MyHeader<TC,C> col = cols.search(new MyHeader<>(column));
         MyHeader<TR,C> rowH = rows.search(new MyHeader<>(row));
@@ -102,6 +107,12 @@ public class MyMatrix<TC,TR,C>{
             rowH.cells.search(node).setInfo(info);
         }
     }
+    /**
+     * Metodo que borra una informacion
+     * @param column columna donde esta la informacion
+     * @param row fila donde esta la informacion
+     * @param info informacion de la celda
+     */
     public void delete(TC column,TR row,C info){
     	MyHeader<TC,C> colSearch = cols.search(new MyHeader<>(column));
         MyHeader<TR,C> rowSearch = rows.search(new MyHeader<>(row));
@@ -110,6 +121,14 @@ public class MyMatrix<TC,TR,C>{
             rowSearch.deleteCell(this.comparatorInfo,info);
         }
     }
+    /**
+     * Metodo que cuenta cuantos elementos se encuentrar en el area rectangular dada
+     * @param x primera fila del rectangulo
+     * @param x1 ultima fla del rectangulo
+     * @param y primera columna del rectangulo
+     * @param y1 ultima columna del rectangulo
+     * @return String elementos en el area y su informacion
+     */
     public String elementsRectangular(TR x,TR x1,TC y,TC y1){
         String result = " ";
         int count =0;
@@ -133,6 +152,13 @@ public class MyMatrix<TC,TR,C>{
         }
         return result;
     }
+    /**
+     * Metodo que cuenta los elementos ubicada en un area circular
+     * @param circleX fila del centro del circulo
+     * @param circleY columna del centro del circulo
+     * @param radius radio del circulo
+     * @return String elementos en el circulo
+     */
     public String numberInCircualArea(TR circleX, TC circleY, int radius){
         int count = 0;
         double circleRadius = Math.sqrt(radius);
@@ -152,7 +178,14 @@ public class MyMatrix<TC,TR,C>{
         return "Numero de elementos dentro del circulo ---> " +count;
     }
 
-
+    /**
+     * Metodo que expone a dos y luego calcula la raiz
+     * @param xOrigin 
+     * @param yOrigin
+     * @param xCircle
+     * @param yCircle
+     * @return double raiz de los cuatro elementos
+     */
     public double obtainSQRT(float xOrigin, float yOrigin, float xCircle,float yCircle){
         double aux1 = Math.pow(xOrigin - xCircle,2);
         double aux2 = Math.pow(yOrigin - yCircle,2);
@@ -160,6 +193,14 @@ public class MyMatrix<TC,TR,C>{
         return Math.sqrt(aux1+aux2);
 
     }
+    /**
+     * Metodo que calcula la distancia entre cuatro parametros dos filas y dos columnas con el radio de la tierra
+     * @param origenX primera fila
+     * @param origenY primera columna
+     * @param destinoX segunda fila
+     * @param destinoY segunda columna
+     * @return float la distancia entre las dos
+     */
     public float distanceBetween(TR origenX, TC origenY, TR destinoX, TC destinoY){
         float radtierra = 6378.0F;
         double difLat = Math.toRadians((Float) origenX- (Float) destinoX);
@@ -168,6 +209,6 @@ public class MyMatrix<TC,TR,C>{
         System.out.println(aux);
         float aux1 = (float) (Math.atan2(Math.sqrt(aux),Math.sqrt(1-aux)));
         System.out.println(aux1);
-        return (float) (radtierra * aux1);
+        return (float) (radtierra * aux1)*2;
     }
 }

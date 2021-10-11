@@ -96,24 +96,6 @@ public class MyDoubleList<T> {
             this.first = new MyDoubleNode<>(info,this.first,null);
         }
     }
-
-    public void print() {
-        MyDoubleNode<T> aux = this.first;
-        while (aux.next != null) {
-            System.out.print(aux.info + " ");
-            aux = aux.next;
-        }
-        System.out.println();
-    }
-    public void printBack() {
-        MyDoubleNode<T> aux = this.last;
-        while (aux.prior != null) {
-            System.out.print(aux.info + " ");
-            aux = aux.prior;
-        }
-        System.out.println();
-    }
-
     /**
      * Busca un nodo y retorna su informacion
      * @param info nodo
@@ -133,6 +115,11 @@ public class MyDoubleList<T> {
         }
         return null;
     }
+    /**
+     * Metodo que busca un nodo
+     * @param info nodo a buscar
+     * @return MyDoubleNode<T> nodo encontrado o null
+     */
     public MyDoubleNode<T> search(MyDoubleNode info){
         if (this.last!=null&&this.last==info){
             return this.last;
@@ -149,7 +136,11 @@ public class MyDoubleList<T> {
     }
 
 
-
+    /**
+     * Metodo que borra un nodo
+     * @param comparator comparador de tipo T
+     * @param info informacion de tipo T a buscar
+     */
     public void remove(Comparator<T> comparator,T info){
         if ((isEmpty())){
         }
