@@ -16,7 +16,10 @@ public class ServerThread extends Thread{
     private DataOutputStream dataOutputStream;
     private String userId = " ";
     private MyMatrix <Float, Float, Pokemon> matrix;
-   private ArrayList <Pokemon> pokemons;
+    private ArrayList <Pokemon> pokemons;
+    private Float longitud;
+    private Float latitud;
+    private int radio = 30;
 
     public ServerThread(Socket socket, ArrayList<ServerThread> serverThreads) throws IOException {
         this.socket = socket;
@@ -43,7 +46,21 @@ public class ServerThread extends Thread{
     }
 
 
+    public Float getLongitud() {
+        return longitud;
+    }
 
+    public void setLongitud(Float longitud) {
+        this.longitud = longitud;
+    }
+
+    public Float getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Float latitud) {
+        this.latitud = latitud;
+    }
 
     @Override
     public void run() {
@@ -54,6 +71,9 @@ public class ServerThread extends Thread{
             aux = dataInputStream.readUTF();
             this.setUserId(aux);
             System.out.println("User Id  ahora --> " + this.getUserId());
+            longitud = this.dataInputStream.readFloat();
+            latitud = this.dataInputStream.readFloat();
+            System.out.println("latitud " + latitud +"," + "Longitud -> "+ longitud);
             dataOutputStream.writeUTF(this.menu());
             //Manejo la entrada
             int opcionEntrada = 0;
@@ -72,15 +92,16 @@ public class ServerThread extends Thread{
                         break;*/
                     case 1:
 
-                        String out = this.matrix.get((Float)this.dataInputStream.readFloat(),(Float)this.dataInputStream.readFloat()).toString();
+                        String out = " Dato -> "+ this.matrix.get((Float)this.dataInputStream.readFloat(),(Float)this.dataInputStream.readFloat()).toString();
                         this.dataOutputStream.writeUTF("Dato encontrado --> " + out);
                         break;
                     case 2:
-                        Float aux3 = (Float)this.dataInputStream.readFloat();
-                        Float aux4 = (Float)this.dataInputStream.readFloat();
-                        String infoToChange = this.dataInputStream.readUTF();
-                        //this.matrix.set(aux3,aux4,infoToChange);
-                        String newInfo = "Modificado --> " + this.matrix.get(aux3,aux4);
+
+                        ArrayList <Pokemon> auxPokemons = this.matrix.numberInCircualArea(longitud,latitud,this.radio);
+                        String newInfo = " ";
+                        for (Pokemon pokemon:auxPokemons) {
+                            newInfo += "Pokemon encontrado -->" + pokemon.toString()+"\n";
+                        }
                         this.dataOutputStream.writeUTF(newInfo);
                         break;
                     case 3:
@@ -93,6 +114,30 @@ public class ServerThread extends Thread{
                         System.out.println(outDelete);
                         break;
                     case 4:
+                        ArrayList <Pokemon> nearPokemons = this.matrix.numberInCircualArea(latitud,longitud,5);
+                        String outCaptured = "";
+                        int count = 1;
+                        for (Pokemon pokemon : nearPokemons) {
+                            outCaptured +="[" +count + "] Tienes cerca al " + pokemon.getName() + " salvaje\n";
+                            count++;
+                        }
+                        outCaptured += "Escribe el numero del pokemon que quieres atrapar";
+                        this.dataOutputStream.writeUTF(outCaptured);
+                        int option = this.dataInputStream.readInt();
+                        String pokemon = nearPokemons.get(option-1).toString();
+                        nearPokemons.get(option-1);
+                        this.dataOutputStream.writeUTF(pokemon);
+
+                        break;
+                    case 6:
+                        Float latChange = this.dataInputStream.readFloat();
+                        Float lonChange = this.dataInputStream.readFloat();
+                        this.setLatitud(latChange);
+                        this.setLongitud(lonChange);
+                        String notice = "Coordenadas cambiadas satisfactoriamente a " + this.getLatitud() + " latitud, "
+                                + this.getLongitud()+ " longitud";
+                        this.dataOutputStream.writeUTF(notice);
+                        break;
 
 
 
@@ -112,11 +157,12 @@ public class ServerThread extends Thread{
         return  "-------------------------Bienvenido a Pokemon GO-------------------------\n"+
                 "" +
                 "1. Obtener el dato de un Pokemon con su ubicacion\n" +
-                "2. \n" +
-                "3. " +
-                "4. Encontrar la cantidad de elementos dentro de un area rectangular\n"+
-                "5. Encontrar la cantidad de pokemons cerca a ti, en un radio circular\n"+
-                "6. Encontrar la distancia entre el usuario -> " + this.userId + "y un pokemon \n"+
+                "2. Encontrar la cantidad de pokemons cerca a ti, en un radio circular\n" +
+                "3. Encontrar la distancia entre el usuario -> "+  this.userId + " y un pokemon\n" +
+                "4. Preguntar si tienes un pokemon cerca para atraparlo\n"+
+                "5. Mostrar tus pokemons capturados\n"+
+                "6. Cambiar posicion del cliente\n"+
+
                 "7. Salir";
     }
 
@@ -128,8 +174,8 @@ public class ServerThread extends Thread{
         System.out.println(pokemons.size());
         for (Pokemon pokemon: pokemons) {
             System.out.println(pokemon);
-            float aux1 = this.random()*10;
-            float aux2 = this.random()*10;
+            float aux1 = this.random()*100;
+            float aux2 = this.random()*100;
             System.out.println("Aux1-->" + aux1 +',' + "Aux 2--->" + aux2);
             this.matrix.add(aux1,aux2, pokemon);
 

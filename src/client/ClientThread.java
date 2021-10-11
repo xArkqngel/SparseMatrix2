@@ -4,6 +4,7 @@ import pokemons.Pokemon;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 /**
@@ -19,10 +20,11 @@ public class ClientThread implements Runnable{
     private DataInputStream inputStream;
     private DataOutputStream output;
     private String myId;
-
+    private ArrayList <Pokemon> pokemonsCaptured;
     public ClientThread(Socket socket) throws IOException {
         this.socket = socket;
         this.scanner = new Scanner(System.in);
+        this.pokemonsCaptured = new ArrayList<>();
     }
 
     /**
@@ -38,6 +40,12 @@ public class ClientThread implements Runnable{
             String message = scanner.nextLine();
             System.out.println(message + " <--- Su ID");
             this.output.writeUTF(message);
+            System.out.println("Escriba su posicion inicial en formato latitud - longitud");
+            Float lat = Float.parseFloat(scanner.next());
+            Float longitud = Float.parseFloat(scanner.next());
+            this.output.writeFloat(lat);
+            this.output.writeFloat(longitud);
+
 
             //Leo el menu
             int choice = 0;
@@ -60,7 +68,7 @@ public class ClientThread implements Runnable{
                         this.output.writeUTF(info);
                         break;*/
                     case 1:
-                        System.out.println("--- Esogiste la opcion 1 ---\nIngrese la columna especificada");
+                        System.out.println("--- Escogiste la opcion 1 ---\nIngrese la columna especificada");
                         String float1 = this.scanner.next();
                         this.output.writeFloat(Float.parseFloat(float1));
                         System.out.println("Ingrese la fila ");
@@ -70,6 +78,13 @@ public class ClientThread implements Runnable{
                         System.out.println(received);
                         break;
                     case 2:
+                        System.out.println("--- Escogiste la opcion 2 ---\n");
+                        String income = this.inputStream.readUTF();
+                        System.out.println(income);
+
+                        break;
+
+                    /**case 2:
                         System.out.println("--- Esogiste la opcion 2 ---\nIngrese la columna especificada");
                         this.output.writeFloat(this.scanner.nextFloat());
                         System.out.println("Ingrese la fila ");
@@ -87,9 +102,31 @@ public class ClientThread implements Runnable{
                         this.output.writeFloat(this.scanner.nextFloat());
                         String receivedDeleted  = this.inputStream.readUTF();
                         System.out.println(receivedDeleted);
+                     */
                     case 4:
-                        System.out.println("--- Esogiste la opcion 4 ---\nIngrese la fila del rectangulo");
-                        Float [] aFloatOut = new Float[4];
+                        System.out.println("--- Escogiste la opcion 4 ---\nVamos a ver si puedes atrapar un Pokemon");
+                        String receivePokemonToCapture = this.inputStream.readUTF();
+                        System.out.println(receivePokemonToCapture);
+                        int option = scanner.nextInt();
+                        this.output.writeInt(option);
+                        String pokemonCaptured = this.inputStream.readUTF();
+                        System.out.println("Has atrapado al pokemon " + pokemonCaptured);
+                        String poke[] = pokemonCaptured.split(",");
+                        this.pokemonsCaptured.add(new Pokemon(Integer.parseInt(poke[0]),poke[1]));
+                    case 5:
+                        for (Pokemon pokemon : this.pokemonsCaptured) {
+                            System.out.println("ID --> " + pokemon.getId() + ", Name --> " + pokemon.getName());
+                        }
+                        break;
+                    case 6:
+                        System.out.println("--- Escogiste la opcion 6 ---\nCambiar posicion del cliente");
+                        System.out.println("Ingrese latitud ");
+                        this.output.writeFloat(this.scanner.nextFloat());
+                        System.out.println("Ingrese longitud  ");
+                        this.output.writeFloat(this.scanner.nextFloat());
+                        String aux = this.inputStream.readUTF();
+                        System.out.println(aux);
+                        break;
 
 
 
