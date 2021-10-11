@@ -52,8 +52,8 @@ public class ServerThread extends Thread{
         this.setUserId(aux);
         System.out.println("User Id  ahora --> " + this.getUserId());
         try {
-            while (true){
-
+            while (dataInputStream.readUTF()!="8"){
+                dataOutputStream.writeUTF(this.menu());
             }
 
         }catch (Exception e){
@@ -68,6 +68,12 @@ public class ServerThread extends Thread{
     }
 
     public String menu(){
-        return "1.  ";
+        return "1. Añadir un dato en una fila y columna especificada\n" +
+                "2. Obtener el dato de una fila y columna especificada" +
+                "3. Modificar un dato en una columna, fila y con el valor del dato" +
+                "4. Borrar un dato en una columna, fila y con el valor del dato " +
+                "5. Encontrar la cantidad de elementos dentro de un area rectangular"+
+                "6. Encontrar la cantidad de elementos dentro de un area circular"+
+                "7. Encontrar la distancia entre dos elementos";
     }
 }

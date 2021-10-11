@@ -28,6 +28,10 @@ public class ClientThread implements Runnable{
             System.out.println(message + " <--- Su ID");
             this.output = new DataOutputStream(this.socket.getOutputStream());
             this.output.writeUTF(message);
+
+            //Leo el menu
+            System.out.println("Menu -->"+ "\n " + this.inputStream.readUTF());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
