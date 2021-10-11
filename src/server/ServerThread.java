@@ -204,7 +204,27 @@ public class ServerThread extends Thread {
                 "7. Salir\n" +
                 "-------------------------------------------------------------------------";
     }
+    public void changeMatrix() {
+        MyMatrix<Float, Float, Pokemon> matrix2 = new MyMatrix<>((x, y) -> x.compareTo(y), (x, y) -> x.compareTo(y), new Comparator<Pokemon>() {
+            @Override
+            public int compare(Pokemon o1, Pokemon o2) {
+                return o2.getId() - o1.getId();
+            }
+        });
+        ArrayList<Pokemon> pokemonsNews = new ArrayList<>();
+        pokemons = JsonFileManager.readFile("src/data/pokedex.json");
+        System.out.println(pokemons.size());
+        for (Pokemon pokemon : pokemons) {
+            System.out.println(pokemon);
+            float aux1 = this.random() * 100;
+            float aux2 = this.random() * 100;
+            System.out.println("Aux1-->" + aux1 + ',' + "Aux 2--->" + aux2);
+            matrix2.add(aux1, aux2, pokemon);
 
+        }
+        System.out.println("CAMBIADOOSSSS");
+        this.matrix = matrix2;
+    }
 
     public void addPokemons() {
         ArrayList<Pokemon> pokemons2 = new ArrayList<>();
