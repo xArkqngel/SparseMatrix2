@@ -102,60 +102,66 @@ public class MyMatrix<TC,TR,C>{
             rowH.cells.search(node).setInfo(info);
         }
     }
+
     public String elementsRectangular(TR x,TR x1,TC y,TC y1){
-        String result = "";
+        String result = " ";
         int count =0;
-        MyDoubleNode<MyHeader<TC,C>> auxCols = cols.searchNode(y);
-        MyDoubleNode<MyHeader<TC,C>> auxColsFinal = cols.searchNode(y1);
-        MyDoubleNode<MyHeader<TR,C>> auxRows = cols.searchNode(y);
-        MyDoubleNode<MyHeader<TR,C>> auxRowsFinal = cols.searchNode(y1);
-        while(auxCols!=null && auxColsFinal!=null && comparatorCol.compare(auxCols,auxColsFinal)=<0 ){
-            while(auxRows!=null && auxRowsFinal!=null && comparatorRow.compare(auxRows,auxRowsFinal)=<0 ){
-                C auxInfo = this.get(auxCols.getInfo(),auxRows.getInfo());
-                if(auxInfo!=null){
-                    count++;
-                    result += auxInfo +"\n";
+
+        MyDoubleNode<MyHeader<TR,C>> auxRow = rows.getFirst();
+        while (auxRow!=null  &&comparatorRow.compare(auxRow.getInfo().getInfo(), x1)<=0){
+            if (comparatorRow.compare(auxRow.getInfo().getInfo(), x)>=0) {
+                MyDoubleNode<MyHeader<TC,C>> auxCol = cols.getFirst();
+                while (auxCol != null && comparatorCol.compare(auxCol.getInfo().getInfo(), y1) <= 0) {
+                    if (comparatorCol.compare(auxCol.getInfo().getInfo(), y) >= 0) {
+                        C data = get(auxCol.getInfo().getInfo(), auxRow.getInfo().getInfo());
+                        if (data != null) {
+                            result += data+" ";
+                            count++;
+                        }
+                    }
+                    auxCol = auxCol.getNext();
                 }
-                auxRows = auxRows.getNext();
             }
-            auxCols=auxCols.getNext();
+            auxRow = auxRow.getNext();
         }
-        return "En el area rectangular hay " + count + "\n"+result;
-    }
-    public MyDoubleList<C> elementsCol(TC y, TC y1){
-        MyDoubleNode<MyHeader<TC,C>> auxCols = cols.searchNode(y);
-        MyDoubleNode<MyHeader<TC,C>> auxColsFinal = cols.searchNode(y1);
-        MyDoubleList<C> listCols = new MyDoubleList<>();
-        while (auxCols!=null && auxColsFinal!=null && comparatorCol.compare(auxCols,auxColsFinal)=<0 ){
-            MyDoubleNode<C> nodeCols = auxCols.cells.getFirst();
-            while(nodeCols!=null){
-                listCols.add(nodeCols.getInfo());
-                nodeCols = nodeCols.getNext();
-            }
-            auxCols = auxCols.getNext();
-        }
-        return listCols;
+        return result;
     }
 
-    public String numberInCircualArea(TR circleX, TC circleY, int radius){
-        this.reset();
-        int count = 0;
-        double circleRadius = Math.sqrt(radius);
-        while (this.isInto()){
-            models.MyHeader<TC,TR,C> header = this.getNext();
-            header.reset();
-            TR row = header.getNextRow();
-            while (row!=null){
-                double aux = this.obtainSQRT((Float) row,(Float)header.getColumn(),(Float) circleX,(Float) circleY);
-                if (aux<=circleRadius){
-                    count++;
 
-                }
-                row = header.getNextRow();
-            }
-        }
-        return "Numero de elementos dentro del circulo ---> " +count;
-    }
+//    public MyDoubleList<C> elementsCol(TC y, TC y1){
+//        MyDoubleNode<MyHeader<TC,C>> auxCols = cols.searchNode(y);
+//        MyDoubleNode<MyHeader<TC,C>> auxColsFinal = cols.searchNode(y1);
+//        MyDoubleList<C> listCols = new MyDoubleList<>();
+//        while (auxCols!=null && auxColsFinal!=null && comparatorCol.compare(auxCols,auxColsFinal)=<0 ){
+//            MyDoubleNode<C> nodeCols = auxCols.cells.getFirst();
+//            while(nodeCols!=null){
+//                listCols.add(nodeCols.getInfo());
+//                nodeCols = nodeCols.getNext();
+//            }
+//            auxCols = auxCols.getNext();
+//        }
+//        return listCols;
+//    }
+//
+//    public String numberInCircualArea(TR circleX, TC circleY, int radius){
+//        this.reset();
+//        int count = 0;
+//        double circleRadius = Math.sqrt(radius);
+//        while (this.isInto()){
+//            models.MyHeader<TC,TR,C> header = this.getNext();
+//            header.reset();
+//            TR row = header.getNextRow();
+//            while (row!=null){
+//                double aux = this.obtainSQRT((Float) row,(Float)header.getColumn(),(Float) circleX,(Float) circleY);
+//                if (aux<=circleRadius){
+//                    count++;
+//
+//                }
+//                row = header.getNextRow();
+//            }
+//        }
+//        return "Numero de elementos dentro del circulo ---> " +count;
+//    }
 
 
     public double obtainSQRT(float xOrigin, float yOrigin, float xCircle,float yCircle){

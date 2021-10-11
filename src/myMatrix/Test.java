@@ -39,11 +39,11 @@ public class Test {
         matrix.add(334F,132F,"9 no col");
 
 //		matrix.test();
-        System.out.println( matrix.get(332F,123F));
+        System.out.println( matrix.get(332F,124F));
 
-        System.out.println(matrix.numberOfElementsIntoRectangularArea(331F,340F,122F,140F));
-        System.out.println(matrix.numberInCircualArea(330F,120F,100));
-        System.out.println(matrix.distanceBetween(1F,1F,5F,5F));
+        System.out.println(matrix.elementsRectangular(123F,133F,332F,335F));
+//        System.out.println(matrix.numberInCircualArea(330F,120F,100));
+//        System.out.println(matrix.distanceBetween(331F,1F,5F,5F));
 
     }
 }
