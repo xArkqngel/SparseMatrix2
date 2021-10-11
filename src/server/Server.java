@@ -50,6 +50,6 @@ public class Server {
     }
 
     public static void main(String[] args) throws IOException {
-        Server server = new Server(23);
+        Server server = new Server(Integer.parseInt(args[0]));
     }
 }
