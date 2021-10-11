@@ -102,15 +102,13 @@ public class MyMatrix<TC,TR,C>{
             rowH.cells.search(node).setInfo(info);
         }
     }
-     public void delete(TC column,TR row,C info){
+    public void delete(TC column,TR row,C info){
     	MyHeader<TC,C> colSearch = cols.search(new MyHeader<>(column));
         MyHeader<TR,C> rowSearch = rows.search(new MyHeader<>(row));
-        System.out.println(colSearch);
         if(rowSearch!=null&&colSearch!=null){
             colSearch.deleteCell(this.comparatorInfo, info);
             rowSearch.deleteCell(this.comparatorInfo,info);
         }
-       
     }
     public String elementsRectangular(TR x,TR x1,TC y,TC y1){
         String result = " ";
