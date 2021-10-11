@@ -150,35 +150,28 @@ public class MyDoubleList<T> {
 
 
 
-    public boolean remove(T info){
-        String infoS = info.toString();
-        boolean result = false;
+    public void remove(Comparator<T> comparator,T info){
         if ((isEmpty())){
         }
-        else if (this.first == this.last && this.first.info.toString().equals(infoS)) {
+        else if (this.first == this.last && comparator.compare(this.first.info,info)==0) {
             this.first =this.last = null;
-            result = true;
         }
-        else if (this.first.info.toString().equals(infoS)) {
+        else if (comparator.compare(this.first.info,info)==0) {
             this.first = this.first.next;
             this.first.prior = null;
-            result = true;
         }
-        else if (this.last.info.toString().equals(infoS)) {
+        else if (comparator.compare(this.last.info,info)==0) {
             this.last = this.last.prior;
-            this.first.next = null;
-            result = true;
+            this.last.next = null;
         }
         else {
             MyDoubleNode<T> aux = this.first;
-            while (aux != null && aux.info.toString().equals(infoS)) {
+            while (aux != null && comparator.compare(aux.info,info)!=0) {
                 aux = aux.next;
             }
-            if (aux!=null){
+            if (comparator.compare(aux.info,info)==0){
                 aux.prior.next = aux.next;
-                result = true;
             }
         }
-        return result;
     }
 }
