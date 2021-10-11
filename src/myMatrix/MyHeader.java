@@ -26,6 +26,7 @@ public class MyHeader <T,TC>{
     public void setInfoCell(Comparator<TC> infoCell,TC info){
         cells.searchInfo(infoCell).setInfo(info);
     }
+
     public void add(MyDoubleNode<TC> info){
         cells.addNode(info);
     }

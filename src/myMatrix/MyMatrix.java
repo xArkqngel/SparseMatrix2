@@ -38,34 +38,30 @@ public class MyMatrix<TC,TR,C>{
      */
     public void add(TC column,TR row,C info) {
         MyHeader<TC,C> columnH = new MyHeader<>(column);
-        MyHeader<TR,C> rowHeader = new MyHeader<>(row);
+        MyHeader<TR,C> rowH = new MyHeader<>(row);
         MyHeader<TC,C> colSearch = cols.search(columnH);
-        MyHeader<TR,C> rowSearch = rows.search(rowHeader);
-        MyDoubleNode<C> node = new MyDoubleNode<>(info);
+        MyHeader<TR,C> rowSearch = rows.search(rowH);
+        MyDoubleNode<C> nodeRow = new MyDoubleNode<>(info);
+        MyDoubleNode<C> nodeCol = new MyDoubleNode<>(info);
         if (colSearch!=null && rowSearch!=null){
-            colSearch.add(node);
-            rowSearch.add(node);
-            System.out.println(node.getInfo()+" ambos");
+            colSearch.add(nodeCol);
+            rowSearch.add(nodeRow);
         }else if(colSearch==null && rowSearch!=null){
-            columnH.add(node);
+            columnH.add(nodeCol);
             cols.add(columnH);
-            rowSearch.add(node);
-            System.out.println(node.getInfo()+" no cols");
+            rowSearch.add(nodeRow);
         }else if (colSearch!=null && rowSearch==null){
-            rowHeader.add(node);
-            rows.add(rowHeader);
-            colSearch.add(node);
-            System.out.println(node.getInfo()+" no rows");
+            rowH.add(nodeRow);
+            rows.add(rowH);
+            colSearch.add(nodeCol);
         }else {
-            columnH.add(node);
+            columnH.add(nodeCol);
             cols.add(columnH);
-            rowHeader.add(node);
-            rows.add(rowHeader);
-            System.out.println(node.getInfo()+" nono");
-            cols.insertionSort();
-            rows.insertionSort();
+            rowH.add(nodeRow);
+            rows.add(rowH);
         }
-
+        cols.insertionSort();
+        rows.insertionSort();
     }
 
     /**
@@ -103,44 +99,34 @@ public class MyMatrix<TC,TR,C>{
         }
     }
 
-//    public String numberOfElementsIntoRectangularArea(TR x, TR x1, TC y, TC y1){
-//        this.reset();
-//        int count = 0;
-//        while (this.isInto()) {
-//            models.MyHeader<TC,TR,C> header = this.getNext();
-//            header.reset();
-//            TR row = header.getNextRow();
-//            while(row != null) {
-//                if (compareRows.compare(row, x)>=0 && compareRows.compare(row, x1)<=0
-//                        && compareCols.compare(header.getColumn(), y)>=0 && compareCols.compare(header.getColumn(), y1)<=0){
-//                    System.out.println(header.getCell(row));
-//                    count++;
-//                }
-//                row = header.getNextRow();
-//            }
-//        }
-//        return count+"xd";
-//    }
-//
-//    public String numberInCircualArea(TR circleX, TC circleY, int radius){
-//        this.reset();
-//        int count = 0;
-//        double circleRadius = Math.sqrt(radius);
-//        while (this.isInto()){
-//            models.MyHeader<TC,TR,C> header = this.getNext();
-//            header.reset();
-//            TR row = header.getNextRow();
-//            while (row!=null){
-//                double aux = this.obtainSQRT((Float) row,(Float)header.getColumn(),(Float) circleX,(Float) circleY);
-//                if (aux<=circleRadius){
-//                    count++;
-//
-//                }
-//                row = header.getNextRow();
-//            }
-//        }
-//        return "Numero de elementos dentro del circulo ---> " +count;
-//    }
+    public String numberOfElementsIntoRectangularArea(TR x, TR x1, TC y, TC y1){
+        MyDoubleNode<MyHeader<TC,C>> auxCols = cols.getFirst();
+        MyDoubleNode<MyHeader<TR,C>> auxCols = cols.getFirst();
+        while (auxCols!=null){
+
+        }
+
+    }
+
+    public String numberInCircualArea(TR circleX, TC circleY, int radius){
+        this.reset();
+        int count = 0;
+        double circleRadius = Math.sqrt(radius);
+        while (this.isInto()){
+            models.MyHeader<TC,TR,C> header = this.getNext();
+            header.reset();
+            TR row = header.getNextRow();
+            while (row!=null){
+                double aux = this.obtainSQRT((Float) row,(Float)header.getColumn(),(Float) circleX,(Float) circleY);
+                if (aux<=circleRadius){
+                    count++;
+
+                }
+                row = header.getNextRow();
+            }
+        }
+        return "Numero de elementos dentro del circulo ---> " +count;
+    }
 
 
     public double obtainSQRT(float xOrigin, float yOrigin, float xCircle,float yCircle){

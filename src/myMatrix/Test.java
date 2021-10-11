@@ -29,18 +29,21 @@ public class Test {
         });
 
         matrix.add(333F,123F,"1 nono");
-        matrix.add(1F,123F,"S2S no col");
-        matrix.add(332F,123F,"S3S no col");//
-        matrix.add(12F,132F,"S4S nono");
-        matrix.add(332F,124F,"S5S no row");//
-        matrix.add(1F,124F,"ambos");//
+        matrix.add(1F,123F,"2 no col");
+        matrix.add(332F,123F,"3 no col");//
+        matrix.add(12F,132F,"4 nono");
+        matrix.add(332F,124F,"5 no row");//
+        matrix.add(1F,124F,"6 ambos");//
+        matrix.add(1F,125F,"7 no row");//
+        matrix.add(1F,126F,"8 no row");//
+        matrix.add(334F,132F,"9 no col");
 
 //		matrix.test();
         System.out.println( matrix.get(332F,123F));
 
-//        System.out.println(matrix.numberOfElementsIntoRectangularArea(331F,340F,122F,140F));
-//        System.out.println(matrix.numberInCircualArea(330F,120F,100));
-//        System.out.println(matrix.distanceBetween(1F,1F,5F,5F));
+        System.out.println(matrix.numberOfElementsIntoRectangularArea(331F,340F,122F,140F));
+        System.out.println(matrix.numberInCircualArea(330F,120F,100));
+        System.out.println(matrix.distanceBetween(1F,1F,5F,5F));
 
     }
 }
