@@ -1,6 +1,12 @@
 package myMatrix;
 
-
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ **/
 public class MyCoordinate{
     private double lat;
     private double lon;
@@ -9,6 +15,12 @@ public class MyCoordinate{
         this.lat = lat;
         this.lon = lon;
     }
+
+    /**
+     * Calcula la distancia entre 2 puntos, usando el metodo de Haversine
+     * @param destino
+     * @return
+     */
     public double distanceBetween(MyCoordinate destino){
         double radius = 6378.0;
         double difLat = Math.toRadians(destino.lat- this.lat);
