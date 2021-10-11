@@ -8,6 +8,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ServerThread extends Thread {
     private Socket socket;
@@ -70,27 +72,19 @@ public class ServerThread extends Thread {
         try {
             aux = dataInputStream.readUTF();
             this.setUserId(aux);
-            System.out.println("User Id  ahora --> " + this.getUserId());
+            System.out.println("Conectado user id  --> " + this.getUserId());
             longitud = this.dataInputStream.readFloat();
             latitud = this.dataInputStream.readFloat();
-            System.out.println("latitud " + latitud + "," + "Longitud -> " + longitud);
             dataOutputStream.writeUTF(this.menu());
             //Manejo la entrada
             int opcionEntrada = 0;
-            this.changeTime();
+
             do {
 
                 opcionEntrada = dataInputStream.readInt();
                 switch (opcionEntrada) {
 
-                    /*+case 1:
-                        //TC TR Info
-                        // Float Float String
-                        Float aux1 = (Float)this.dataInputStream.readFloat();
-                        Float aux2 = (Float)this.dataInputStream.readFloat();
-                        String info = this.dataInputStream.readUTF();
-                        this.matrix.add( aux1,aux2,info);
-                        break;*/
+
                     case 1:
 
                         String out = " Dato -> " + this.matrix.get((Float) this.dataInputStream.readFloat(), (Float) this.dataInputStream.readFloat());
@@ -108,13 +102,22 @@ public class ServerThread extends Thread {
                         this.dataOutputStream.writeUTF(newInfo);
                         break;
                     case 3:
-                        Float aux5 = (Float) this.dataInputStream.readFloat();
-                        Float aux6 = (Float) this.dataInputStream.readFloat();
-                        String infoToDelete = this.dataInputStream.readUTF();
-                        this.matrix.delete(aux5, aux6, this.matrix.get(aux5, aux6));
-                        String outDelete = "Dato --> " + this.matrix.get(aux5, aux6);
-                        this.dataOutputStream.writeUTF(outDelete);
-                        System.out.println(outDelete);
+
+                        String infoToSearch = this.dataInputStream.readUTF();
+
+                        int pos = this.returnPosArray(infoToSearch);
+                        if (pos!=-1){
+                            System.out.println(pos);
+                            Pokemon pokeAux = this.pokemons.get(pos);
+                            Float columnSearch = this.matrix.searchColumn(pokeAux);
+                            Float rowSearch = this.matrix.searchRow(pokeAux);
+                            String distanceBetween = "Distancia entre el pokemon y el usuario en metro es de " + this.userId + " --> " + this.matrix.distanceBetween(this.longitud,this.latitud,rowSearch,columnSearch);
+                            this.dataOutputStream.writeUTF(distanceBetween);
+
+                        }else {
+                            this.dataOutputStream.writeUTF("Ese pokemon no está en nuestra base de datos :/");
+                        }
+
                         break;
                     case 4:
                         ArrayList<Pokemon> nearPokemons = this.matrix.numberInCircualArea(latitud, longitud, 5);
@@ -130,13 +133,19 @@ public class ServerThread extends Thread {
                             }
                             outCaptured += "Escribe el numero del pokemon que quieres atrapar";
                             this.dataOutputStream.writeUTF(outCaptured);
-                            int option = this.dataInputStream.readInt();
-                            String pokemon = nearPokemons.get(option - 1).toString();
-                            this.dataOutputStream.writeUTF(pokemon);
 
-                            this.matrix.delete( this.matrix.searchColumn(nearPokemons.get(option-1)),this.matrix.searchRow(nearPokemons.get(option-1)),nearPokemons.get(option-1));
-                            String out2 = " Dato -> " + this.matrix.get(this.matrix.searchColumn(nearPokemons.get(option-1)), this.matrix.searchRow(nearPokemons.get(option-1))).toString();
-                            System.out.println("OUT 2" + out2);
+                            int option = this.dataInputStream.readInt();
+
+                            Pokemon pokemonMine = nearPokemons.get(option-1);
+                            String pokemon = pokemonMine.toString();
+                            this.dataOutputStream.writeUTF(pokemon);
+                            Float column = this.matrix.searchColumn(pokemonMine);
+                            Float row = this.matrix.searchRow(pokemonMine);
+                            this.matrix.delete(column, row, pokemonMine);
+
+
+
+
                         }
 
 
@@ -153,12 +162,24 @@ public class ServerThread extends Thread {
 
 
                 }
+
             } while (opcionEntrada != 7);
 
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException  e) {
             e.printStackTrace();
         }
 
+
+    }
+
+    public int returnPosArray(String  name){
+
+        for (int i = 0; i < this.pokemons.size(); i++) {
+            if (pokemons.get(i).getName().equalsIgnoreCase(name)){
+                return i;
+            }
+        }
+        return -1;
 
     }
 
@@ -179,45 +200,21 @@ public class ServerThread extends Thread {
 
 
     public void addPokemons() {
-        ArrayList<Pokemon> pokemons = new ArrayList<>();
-        pokemons = JsonFileManager.readFile("src/data/pokedex.json");
-        System.out.println(pokemons.size());
+        ArrayList<Pokemon> pokemons2 = new ArrayList<>();
+        this.pokemons = JsonFileManager.readFile("src/data/pokedex.json");
+
         for (Pokemon pokemon : pokemons) {
-            System.out.println(pokemon);
+
             float aux1 = this.random() * 100;
             float aux2 = this.random() * 100;
-            System.out.println("Aux1-->" + aux1 + ',' + "Aux 2--->" + aux2);
+
             this.matrix.add(aux1, aux2, pokemon);
 
         }
     }
 
-    public void changeMatrix() {
-        MyMatrix<Float, Float, Pokemon> matrix2 = new MyMatrix<>((x, y) -> x.compareTo(y), (x, y) -> x.compareTo(y), new Comparator<Pokemon>() {
-            @Override
-            public int compare(Pokemon o1, Pokemon o2) {
-                return o2.getId() - o1.getId();
-            }
-        });
-        ArrayList<Pokemon> pokemonsNews = new ArrayList<>();
-        pokemons = JsonFileManager.readFile("src/data/pokedex.json");
-        System.out.println(pokemons.size());
-        for (Pokemon pokemon : pokemons) {
-            System.out.println(pokemon);
-            float aux1 = this.random() * 100;
-            float aux2 = this.random() * 100;
-            System.out.println("Aux1-->" + aux1 + ',' + "Aux 2--->" + aux2);
-            matrix2.add(aux1, aux2, pokemon);
 
-        }
-        System.out.println("CAMBIADOOSSSS");
-        this.matrix = matrix2;
-    }
 
-    public void changeTime() throws InterruptedException {
-        Thread.sleep(100);
-        this.changeMatrix();
-    }
 
 
     public float random() {

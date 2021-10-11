@@ -42,6 +42,6 @@ public class Test {
         System.out.println(matrix.elementsRectangular(123F,124F,1F,333F));
         System.out.println(matrix.numberInCircualArea(123F,1F,50));
        System.out.println(matrix.distanceBetween(41.57879F,1.617221F,37.176487F,-3.597929F));
-
+        System.out.println(matrix.searchColumn("8 no row"));
     }
 }

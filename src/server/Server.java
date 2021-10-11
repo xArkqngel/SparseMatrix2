@@ -37,11 +37,10 @@ public class Server {
                 System.out.println("[*] Usuario conectado --> "+ socket.getInetAddress().getHostAddress());
                 this.serverThread = new ServerThread(socket,this.serverThreads);
                 serverThreads.add(serverThread);
-                serverThread.changeTime();
                 serverThread.start();
 
 
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException  e) {
                 System.out.println("Ups hubo un error " + e);
                 e.printStackTrace();
             }

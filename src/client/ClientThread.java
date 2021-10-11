@@ -41,8 +41,9 @@ public class ClientThread implements Runnable{
             String message = scanner.nextLine();
             System.out.println(message + " <--- Su ID");
             this.output.writeUTF(message);
-            System.out.println("Escriba su posicion inicial en formato latitud - longitud");
+            System.out.println("Escriba su posicion inicial en formato latitud");
             Float lat = Float.parseFloat(scanner.next());
+            System.out.println("Ingrese su longitud");
             Float longitud = Float.parseFloat(scanner.next());
             this.output.writeFloat(lat);
             this.output.writeFloat(longitud);
@@ -57,18 +58,9 @@ public class ClientThread implements Runnable{
                 System.out.println("Ingrese lo que desea hacer --> ");
                 choice = this.scanner.nextInt();
                 this.output.writeInt(choice);
-                // Envio la opcion
-                switch (choice){
-                    /**case 1:
-                        System.out.println("--- Esogiste la opcion 1 ---\nIngrese la columna especificada");
-                        this.output.writeFloat(this.scanner.nextFloat());
-                        System.out.println("Ingrese la fila ");
-                        this.output.writeFloat(this.scanner.nextFloat());
-                        System.out.println("Ingrese la info");
-                        String info = this.scanner.next();
 
-                        this.output.writeUTF(info);
-                        break;*/
+                switch (choice){
+
                     case 1:
                         System.out.println("--- Escogiste la opcion 1 ---\nIngrese la columna especificada");
                         String float1 = this.scanner.next();
@@ -86,25 +78,13 @@ public class ClientThread implements Runnable{
 
                         break;
 
-                    /**case 2:
-                        System.out.println("--- Esogiste la opcion 2 ---\nIngrese la columna especificada");
-                        this.output.writeFloat(this.scanner.nextFloat());
-                        System.out.println("Ingrese la fila ");
-                        this.output.writeFloat(this.scanner.nextFloat());
-                        System.out.println("Ingrese la nueva info de esa celda");
-                        String newInfo = this.scanner.next();
-                        this.output.writeUTF(newInfo);
-                        String received2 = this.inputStream.readUTF();
-                        System.out.println(received2);
-                        break;
                     case 3:
-                        System.out.println("--- Esogiste la opcion 3 ---\nIngrese la columna especificada");
-                        this.output.writeFloat(this.scanner.nextFloat());
-                        System.out.println("Ingrese la fila ");
-                        this.output.writeFloat(this.scanner.nextFloat());
-                        String receivedDeleted  = this.inputStream.readUTF();
-                        System.out.println(receivedDeleted);
-                     */
+                        System.out.println("--- Escogiste la opcion 3 ---\nIngrese el nombre del pokemon que quiere buscar");
+                        String pokeName = this.scanner.next();
+                        this.output.writeUTF(pokeName);
+                        String receivedDistance   = this.inputStream.readUTF();
+                        System.out.println(receivedDistance);
+                    break;
                     case 4:
                         System.out.println("--- Escogiste la opcion 4 ---\nVamos a ver si puedes atrapar un Pokemon");
                         String receivePokemonToCapture = this.inputStream.readUTF();
@@ -141,6 +121,8 @@ public class ClientThread implements Runnable{
                         this.output.writeFloat(this.scanner.nextFloat());
                         String aux = this.inputStream.readUTF();
                         System.out.println(aux);
+                        break;
+                    default:
                         break;
 
 
