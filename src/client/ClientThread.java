@@ -49,7 +49,7 @@ public class ClientThread implements Runnable{
                 this.output.writeInt(choice);
                 // Envio la opcion
                 switch (choice){
-                    case 1:
+                    /**case 1:
                         System.out.println("--- Esogiste la opcion 1 ---\nIngrese la columna especificada");
                         this.output.writeFloat(this.scanner.nextFloat());
                         System.out.println("Ingrese la fila ");
@@ -58,17 +58,19 @@ public class ClientThread implements Runnable{
                         String info = this.scanner.next();
 
                         this.output.writeUTF(info);
-                        break;
-                    case 2:
-                        System.out.println("--- Esogiste la opcion 2 ---\nIngrese la columna especificada");
-                        this.output.writeFloat(this.scanner.nextFloat());
+                        break;*/
+                    case 1:
+                        System.out.println("--- Esogiste la opcion 1 ---\nIngrese la columna especificada");
+                        String float1 = this.scanner.next();
+                        this.output.writeFloat(Float.parseFloat(float1));
                         System.out.println("Ingrese la fila ");
-                        this.output.writeFloat(this.scanner.nextFloat());
+                        String float2 = this.scanner.next();
+                        this.output.writeFloat(Float.parseFloat(float2));
                         String received = this.inputStream.readUTF();
                         System.out.println(received);
                         break;
-                    case 3:
-                        System.out.println("--- Esogiste la opcion 3 ---\nIngrese la columna especificada");
+                    case 2:
+                        System.out.println("--- Esogiste la opcion 2 ---\nIngrese la columna especificada");
                         this.output.writeFloat(this.scanner.nextFloat());
                         System.out.println("Ingrese la fila ");
                         this.output.writeFloat(this.scanner.nextFloat());
@@ -78,18 +80,15 @@ public class ClientThread implements Runnable{
                         String received2 = this.inputStream.readUTF();
                         System.out.println(received2);
                         break;
-                    case 4:
-                        System.out.println("--- Esogiste la opcion 4 ---\nIngrese la columna especificada");
+                    case 3:
+                        System.out.println("--- Esogiste la opcion 3 ---\nIngrese la columna especificada");
                         this.output.writeFloat(this.scanner.nextFloat());
                         System.out.println("Ingrese la fila ");
                         this.output.writeFloat(this.scanner.nextFloat());
-                        System.out.println("Ingrese la info de esa celda");
-                        String newInfo2 = this.scanner.next();
-                        this.output.writeUTF(newInfo2);
                         String receivedDeleted  = this.inputStream.readUTF();
                         System.out.println(receivedDeleted);
-                    case 5:
-                        System.out.println("--- Esogiste la opcion 5 ---\nIngrese la fila del rectangulo");
+                    case 4:
+                        System.out.println("--- Esogiste la opcion 4 ---\nIngrese la fila del rectangulo");
                         Float [] aFloatOut = new Float[4];
 
 
@@ -98,7 +97,7 @@ public class ClientThread implements Runnable{
 
 
 
-            }while (choice!=8);
+            }while (choice!=7);
         } catch (IOException e) {
             e.printStackTrace();
         }
