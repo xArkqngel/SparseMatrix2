@@ -1,8 +1,6 @@
 package myMatrix;
 
 
-import models.Coordinate;
-
 import java.util.Comparator;
 
 
@@ -20,7 +18,6 @@ import java.util.Comparator;
  **/
 public class Test {
     public static void main(String[] args) {
-        Coordinate start = new Coordinate(0,0);
         MyMatrix<Float, Float, String> matrix = new MyMatrix<Float, Float, String>((x, y) -> x.compareTo(y), (x, y) -> x.compareTo(y), new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
@@ -43,7 +40,7 @@ public class Test {
 
         System.out.println(matrix.elementsRectangular(123F,124F,1F,333F));
 //        System.out.println(matrix.numberInCircualArea(330F,120F,100));
-//        System.out.println(matrix.distanceBetween(331F,1F,5F,5F));
+       System.out.println(matrix.distanceBetween(41.57879F,1.617221F,37.176487F,-3.597929F));
 
     }
 }

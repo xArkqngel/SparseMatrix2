@@ -209,6 +209,6 @@ public class MyMatrix<TC,TR,C>{
         System.out.println(aux);
         float aux1 = (float) (Math.atan2(Math.sqrt(aux),Math.sqrt(1-aux)));
         System.out.println(aux1);
-        return (float) (radtierra * aux1);
+        return (float) (radtierra * aux1)*2;
     }
 }
