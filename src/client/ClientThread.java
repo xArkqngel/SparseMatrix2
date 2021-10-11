@@ -3,7 +3,13 @@ package client;
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
-
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ **/
 public class ClientThread implements Runnable{
     private Socket socket;
     private Scanner scanner;
@@ -14,10 +20,11 @@ public class ClientThread implements Runnable{
     public ClientThread(Socket socket) throws IOException {
         this.socket = socket;
         this.scanner = new Scanner(System.in);
-
-
     }
 
+    /**
+     * Inicialización hilo cliente
+     */
     @Override
     public void run() {
         System.out.println("Acá en el run del client thread");

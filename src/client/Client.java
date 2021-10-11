@@ -3,7 +3,13 @@ package client;
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
-
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ **/
 public class Client  {
 
     private Socket socket;
@@ -25,6 +31,11 @@ public class Client  {
         System.out.println("Construido constructor");
 
     }
+
+    /**
+     * Inicialización cliente
+     * @throws IOException
+     */
     public void startConnection() throws IOException {
         new Thread(clientRun).start();
         /**do {
