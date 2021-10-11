@@ -4,6 +4,7 @@ package myMatrix;
 import doubleList.DoubleListSort;
 import doubleList.MyDoubleNode;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -170,8 +171,9 @@ public class MyMatrix<TC,TR,C>{
      * @param radius radio del circulo
      * @return String elementos en el circulo
      */
-    public String numberInCircualArea(TR circleX, TC circleY, int radius){
+    public ArrayList<C> numberInCircualArea(TR circleX, TC circleY, int radius){
         int count = 0;
+        ArrayList<C> pokeFound = new ArrayList<>();
         double circleRadius = Math.sqrt(radius);
         MyDoubleNode<MyHeader<TR,C>> auxRow = rows.getFirst();
         while (auxRow!=null){
@@ -181,14 +183,14 @@ public class MyMatrix<TC,TR,C>{
                 if (get(auxCol.getInfo().getInfo(), auxRow.getInfo().getInfo())!=null) {
                     if (aux<=circleRadius){
                         count++;
-                        System.out.println(auxCol.getInfo().getInfo()+" col --"+auxRow.getInfo().getInfo()+" row");
+                        pokeFound.add(get(auxCol.getInfo().getInfo(), auxRow.getInfo().getInfo()));
                     }
                 }
                 auxCol = auxCol.getNext();
             }
             auxRow = auxRow.getNext();
         }
-        return "Numero de elementos dentro del circulo ---> " +count;
+        return pokeFound;
     }
 
 
