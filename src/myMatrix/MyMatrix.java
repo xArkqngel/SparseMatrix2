@@ -17,6 +17,8 @@ public class MyMatrix<TC,TR,C>{
     private DoubleListSort<MyHeader<TC,C>> cols;
     private DoubleListSort<MyHeader<TR,C>> rows;
     private Comparator<C> comparatorInfo;
+    private Comparator<TC> comparatorCol;
+    private Comparator<TR> comparatorRow;
 
     /**
      * Constructor
@@ -26,6 +28,8 @@ public class MyMatrix<TC,TR,C>{
      */
     public MyMatrix(Comparator<TC> sortCols, Comparator<TR> sortRow,Comparator<C> comparatorInfo) {
         this.comparatorInfo = comparatorInfo;
+        this.comparatorCol = sortCols;
+        this.comparatorRow = sortRow;
         this.cols = new DoubleListSort<>((o1, o2) -> sortCols.compare(o1.getInfo(), o2.getInfo()));
         this.rows = new DoubleListSort<>((o1, o2) -> sortRow.compare(o1.getInfo(), o2.getInfo()));
     }
@@ -98,14 +102,39 @@ public class MyMatrix<TC,TR,C>{
             rowH.cells.search(node).setInfo(info);
         }
     }
-
-    public String numberOfElementsIntoRectangularArea(TR x, TR x1, TC y, TC y1){
-        MyDoubleNode<MyHeader<TC,C>> auxCols = cols.getFirst();
-        MyDoubleNode<MyHeader<TR,C>> auxCols = cols.getFirst();
-        while (auxCols!=null){
-
+    public String elementsRectangular(TR x,TR x1,TC y,TC y1){
+        String result = "";
+        int count =0;
+        MyDoubleNode<MyHeader<TC,C>> auxCols = cols.searchNode(y);
+        MyDoubleNode<MyHeader<TC,C>> auxColsFinal = cols.searchNode(y1);
+        MyDoubleNode<MyHeader<TR,C>> auxRows = cols.searchNode(y);
+        MyDoubleNode<MyHeader<TR,C>> auxRowsFinal = cols.searchNode(y1);
+        while(auxCols!=null && auxColsFinal!=null && comparatorCol.compare(auxCols,auxColsFinal)=<0 ){
+            while(auxRows!=null && auxRowsFinal!=null && comparatorRow.compare(auxRows,auxRowsFinal)=<0 ){
+                C auxInfo = this.get(auxCols.getInfo(),auxRows.getInfo());
+                if(auxInfo!=null){
+                    count++;
+                    result += auxInfo +"\n";
+                }
+                auxRows = auxRows.getNext();
+            }
+            auxCols=auxCols.getNext();
         }
-
+        return "En el area rectangular hay " + count + "\n"+result;
+    }
+    public MyDoubleList<C> elementsCol(TC y, TC y1){
+        MyDoubleNode<MyHeader<TC,C>> auxCols = cols.searchNode(y);
+        MyDoubleNode<MyHeader<TC,C>> auxColsFinal = cols.searchNode(y1);
+        MyDoubleList<C> listCols = new MyDoubleList<>();
+        while (auxCols!=null && auxColsFinal!=null && comparatorCol.compare(auxCols,auxColsFinal)=<0 ){
+            MyDoubleNode<C> nodeCols = auxCols.cells.getFirst();
+            while(nodeCols!=null){
+                listCols.add(nodeCols.getInfo());
+                nodeCols = nodeCols.getNext();
+            }
+            auxCols = auxCols.getNext();
+        }
+        return listCols;
     }
 
     public String numberInCircualArea(TR circleX, TC circleY, int radius){
