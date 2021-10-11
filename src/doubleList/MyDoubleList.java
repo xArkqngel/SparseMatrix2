@@ -116,6 +116,26 @@ public class MyDoubleList<T> {
         return null;
     }
     /**
+     * Metodo que busca si la informacion esta en la lista
+     * @param info informacion a comprobar si esta en la lista
+     * @return boolean true--Si esta en la lista
+     * 					false--No esta en la lista
+     */
+    public boolean searchInfoBoolean(T info){
+        if (this.last!=null&&this.last.info.toString().equals(info.toString())){
+            return true;
+        }else {
+            MyDoubleNode<T> aux = this.first;
+            while (aux!=null&&!aux.info.toString().equals(info.toString())){
+                aux = aux.next;
+            }
+            if (this.last.info.toString().equals(info.toString())){
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
      * Metodo que busca un nodo
      * @param info nodo a buscar
      * @return MyDoubleNode<T> nodo encontrado o null

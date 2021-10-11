@@ -120,6 +120,36 @@ public class MyMatrix<TC,TR,C>{
         }
     }
     /**
+     * Metodo que busca la fila de una informacion
+     * @param info informacion a buscar fila
+     * @return TR fila en la que esta la informacion o null
+     */
+    public TR searchRow(C info) {
+    	MyDoubleNode<MyHeader<TR,C>> aux = rows.getFirst();
+    	while(aux!=null) {
+    		if(aux.getInfo().cells.searchInfoBoolean(info)) {
+    			return aux.getInfo().getInfo();
+    		}
+    		aux = aux.getNext();
+    	}
+    	return null;
+    }
+    /**
+     * Metodo que busca la columna de una informacion
+     * @param info informacion a buscar columna
+     * @return TC columna en la que esta la informacion o null
+     */
+    public TC searchColumn(C info) {
+    	MyDoubleNode<MyHeader<TC,C>> aux = cols.getFirst();
+    	while(aux!=null) {
+    		if(aux.getInfo().cells.searchInfoBoolean(info)) {
+    			return aux.getInfo().getInfo();
+    		}
+    		aux = aux.getNext();
+    	}
+    	return null;
+    }
+    /**
      * Metodo que borra una informacion
      * @param column columna donde esta la informacion
      * @param row fila donde esta la informacion
