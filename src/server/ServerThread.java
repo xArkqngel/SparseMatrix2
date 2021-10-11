@@ -67,6 +67,13 @@ public class ServerThread extends Thread {
 
         String aux = null;
         this.addPokemons();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            changeMatrix();
+          }
+        }, 0, 60000);
         try {
             aux = dataInputStream.readUTF();
             this.setUserId(aux);
