@@ -75,4 +75,18 @@ public class DoubleListSort<T> extends MyDoubleList<T> {
         }
         return null;
     }
+    public MyDoubleNode<T> searchNode(T info){
+        if (this.last!=null&&info.compare(this.last.info,info)==0){
+            return this.last;
+        }else {
+            MyDoubleNode<T> aux = this.first;
+            while (aux!=null&&info.compare(this.last.info,info)!=0){
+                aux = aux.next;
+            }
+            if (info.compare(this.last.info,info)==0){
+                return aux;
+            }
+        }
+        return null;
+    }
 }
