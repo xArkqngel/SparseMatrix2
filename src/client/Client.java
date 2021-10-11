@@ -1,40 +1,43 @@
 package client;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class Client  {
 
     private Socket socket;
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
+
     private ClientThread clientRun;
+    private String id;
+    private DataInputStream input;
+    private DataOutputStream output;
     private Scanner scanner;
     private String userInput = "empty";
 
     public Client(String ip, int port)throws IOException {
-        scanner = new Scanner(System.in);
         socket = new Socket(ip,port);
-        input = new ObjectInputStream(this.socket.getInputStream());
-        output = new ObjectOutputStream(this.socket.getOutputStream());
+        scanner = new Scanner(System.in);
         clientRun = new ClientThread(this.socket);
+        input = new DataInputStream(this.socket.getInputStream());
+        output = new DataOutputStream(this.socket.getOutputStream());
         startConnection();
+        System.out.println("Construido constructor");
 
     }
     public void startConnection() throws IOException {
         new Thread(clientRun).start();
-        do {
-            System.out.println("Envie su numero");
+        /**do {
+            System.out.println("Envie su ID");
             userInput = scanner.nextLine();
-            output.writeObject(new String((userInput)));
+            output.writeUTF(userInput);
+            System.out.println(userInput +"   |||||Esto es el UserInput");
             if (userInput.equals("SALIR")){
                 input.close();
                 break;
             }
-        }while (!userInput.equals("SALIR"));
+        }while (true);*/
+
     }
 
     public static void main(String[] args) throws IOException {

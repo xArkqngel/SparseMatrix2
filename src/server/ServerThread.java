@@ -2,25 +2,23 @@ package server;
 
 import myMatrix.MyMatrix;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class ServerThread extends Thread{
     private Socket socket;
     private ArrayList <ServerThread> serverThreads;
-    private ObjectInputStream objectInputStream;
-    private ObjectOutputStream objectOutputStream;
-    private String userId;
+    private DataInputStream dataInputStream;
+    private DataOutputStream dataOutputStream;
+    private String userId = " ";
     private MyMatrix <Float, Float, String> matrix;
 
     public ServerThread(Socket socket, ArrayList<ServerThread> serverThreads) throws IOException {
         this.socket = socket;
         this.serverThreads = serverThreads;
-        objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        objectInputStream = new ObjectInputStream(socket.getInputStream());
+        dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        dataInputStream = new DataInputStream(socket.getInputStream());
     }
 
     public String getUserId() {
@@ -32,19 +30,44 @@ public class ServerThread extends Thread{
     }
 
 
-    public void setIncomingUserId(){
+    /**public void setIncomingUserId(){
         try {
             this.setUserId((String) (objectInputStream.readUTF()));
+            System.out.println("Usuario conectado con el ID --> " + this.userId);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Override
     public void run() {
-        while(true){
-            setIncomingUserId();
-            System.out.println("Usuario conectado con el ID --> " + this.userId);
+        System.out.println("Esperando para leer ");
+        String aux = null;
+        try {
+            aux = dataInputStream.readUTF();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        this.setUserId(aux);
+        System.out.println("User Id  ahora --> " + this.getUserId());
+        try {
+            while (true){
+
+            }
+
+        }catch (Exception e){
+            System.out.println("Ups ha ocurrido un error" + e);
+
+        }
+
+
+
+
+
+    }
+
+    public String menu(){
+        return "1.  ";
     }
 }

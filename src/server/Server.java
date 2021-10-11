@@ -23,15 +23,18 @@ public class Server {
             try {
                 socket = this.serverSocket.accept();
                 System.out.println("[*] Usuario conectado --> "+ socket.getInetAddress().getHostAddress());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            {
                 this.serverThread = new ServerThread(socket,this.serverThreads);
                 serverThreads.add(serverThread);
                 serverThread.start();
+
+
+            } catch (IOException e) {
+                System.out.println("Ups hubo un error " + e);
+                e.printStackTrace();
             }
+
         }
+
     }
 
     public static void main(String[] args) throws IOException {

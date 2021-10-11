@@ -1,27 +1,41 @@
 package client;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ClientThread implements Runnable{
     private Socket socket;
-    private ObjectInputStream inputStream;
+    private Scanner scanner;
+    private DataInputStream inputStream;
+    private DataOutputStream output;
+    private String myId;
 
-    public ClientThread(Socket socket) {
+    public ClientThread(Socket socket) throws IOException {
         this.socket = socket;
+        this.scanner = new Scanner(System.in);
+
+
     }
 
     @Override
     public void run() {
+        System.out.println("Acá en el run del client thread");
         try {
-            this.inputStream = new ObjectInputStream(this.socket.getInputStream());
-            while (true){
-                String message = (String) inputStream.readObject();
-                System.out.println(message);
-            }
-        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Escriba su ID");
+            this.inputStream = new DataInputStream(this.socket.getInputStream());
+            String message = scanner.nextLine();
+            System.out.println(message + " <--- Su ID");
+            this.output = new DataOutputStream(this.socket.getOutputStream());
+            this.output.writeUTF(message);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendId(String id) throws IOException {
+
+        System.out.println("Dentro del metodo SendId " + id);
+        this.output.writeUTF(id);
     }
 }
