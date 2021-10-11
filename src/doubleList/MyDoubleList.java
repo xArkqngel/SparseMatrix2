@@ -96,24 +96,6 @@ public class MyDoubleList<T> {
             this.first = new MyDoubleNode<>(info,this.first,null);
         }
     }
-
-    public void print() {
-        MyDoubleNode<T> aux = this.first;
-        while (aux.next != null) {
-            System.out.print(aux.info + " ");
-            aux = aux.next;
-        }
-        System.out.println();
-    }
-    public void printBack() {
-        MyDoubleNode<T> aux = this.last;
-        while (aux.prior != null) {
-            System.out.print(aux.info + " ");
-            aux = aux.prior;
-        }
-        System.out.println();
-    }
-
     /**
      * Busca un nodo y retorna su informacion
      * @param info nodo
