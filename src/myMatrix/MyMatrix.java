@@ -139,12 +139,10 @@ public class MyMatrix<TC,TR,C>{
      * @param x1 ultima fla del rectangulo
      * @param y primera columna del rectangulo
      * @param y1 ultima columna del rectangulo
-     * @return String elementos en el area y su informacion
+     * @return ArrayList<C> elementos en el area y su informacion
      */
-    public String elementsRectangular(TR x,TR x1,TC y,TC y1){
-        String result = " ";
-        int count =0;
-
+    public ArrayList<C> elementsRectangular(TR x,TR x1,TC y,TC y1){
+    	ArrayList<C> list = new ArrayList<>();
         MyDoubleNode<MyHeader<TR,C>> auxRow = rows.getFirst();
         while (auxRow!=null  &&comparatorRow.compare(auxRow.getInfo().getInfo(), x1)<=0){
             if (comparatorRow.compare(auxRow.getInfo().getInfo(), x)>=0) {
@@ -153,8 +151,7 @@ public class MyMatrix<TC,TR,C>{
                     if (comparatorCol.compare(auxCol.getInfo().getInfo(), y) >= 0) {
                         C data = get(auxCol.getInfo().getInfo(), auxRow.getInfo().getInfo());
                         if (data != null) {
-                            result += data+" ";
-                            count++;
+                            list.add(data);
                         }
                     }
                     auxCol = auxCol.getNext();
@@ -162,14 +159,14 @@ public class MyMatrix<TC,TR,C>{
             }
             auxRow = auxRow.getNext();
         }
-        return result;
+        return list;
     }
     /**
      * Metodo que cuenta los elementos ubicada en un area circular
      * @param circleX fila del centro del circulo
      * @param circleY columna del centro del circulo
      * @param radius radio del circulo
-     * @return String elementos en el circulo
+     * @return ArrayList<C> elementos en el circulo
      */
     public ArrayList<C> numberInCircualArea(TR circleX, TC circleY, int radius){
         int count = 0;
