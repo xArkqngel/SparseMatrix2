@@ -5,6 +5,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ **/
 public class Server {
     private ArrayList <ServerThread> serverThreads;
     private ServerSocket serverSocket;
@@ -17,6 +24,11 @@ public class Server {
         this.serverThreads = new ArrayList<>();
         this.startMyThread();
     }
+
+    /**
+     * Inicializacion del Servidor
+     * @throws IOException
+     */
     public void startMyThread() throws IOException {
         System.out.println("[*] Running on port --> " + this.serverSocket.getLocalPort());
         while(isRunning){

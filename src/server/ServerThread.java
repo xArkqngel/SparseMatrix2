@@ -5,7 +5,13 @@ import myMatrix.MyMatrix;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ **/
 public class ServerThread extends Thread{
     private Socket socket;
     private ArrayList <ServerThread> serverThreads;
@@ -38,7 +44,9 @@ public class ServerThread extends Thread{
             e.printStackTrace();
         }
     }*/
-
+    /**
+     * Inicializcación del hilo
+     */
     @Override
     public void run() {
         System.out.println("Esperando para leer ");

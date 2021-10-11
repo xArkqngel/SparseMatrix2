@@ -12,7 +12,13 @@ import org.json.simple.JsonObject;
 import org.json.simple.Jsoner;
 
 import pokemons.Pokemon;
-
+/**
+ * @Description
+ * @Author Sofia Suesca
+ * @Author Miguel Rubiano
+ * @Author Martin Chiquillo
+ * @Date 9/10/2021
+ **/
 public class JsonFileManager {
 	/**
 	 * Metodo que lee un archivo json con JsonArray o JsonObject
