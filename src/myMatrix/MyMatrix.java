@@ -167,9 +167,11 @@ public class MyMatrix<TC,TR,C>{
         	MyDoubleNode<MyHeader<TC,C>> auxCol = cols.getFirst();
             while (auxCol!=null){
                 double aux = this.obtainSQRT((Float) auxRow.getInfo().getInfo(),(Float)auxCol.getInfo().getInfo(),(Float) circleX,(Float) circleY);
-                if (aux<=circleRadius){
-                    count++;
-
+                if (get(auxCol.getInfo().getInfo(), auxRow.getInfo().getInfo())!=null) {
+                    if (aux<=circleRadius){
+                        count++;
+                        System.out.println(auxCol.getInfo().getInfo()+" col --"+auxRow.getInfo().getInfo()+" row");
+                    }
                 }
                 auxCol = auxCol.getNext();
             }
@@ -177,6 +179,7 @@ public class MyMatrix<TC,TR,C>{
         }
         return "Numero de elementos dentro del circulo ---> " +count;
     }
+
 
     /**
      * Metodo que expone a dos y luego calcula la raiz
@@ -189,7 +192,6 @@ public class MyMatrix<TC,TR,C>{
     public double obtainSQRT(float xOrigin, float yOrigin, float xCircle,float yCircle){
         double aux1 = Math.pow(xOrigin - xCircle,2);
         double aux2 = Math.pow(yOrigin - yCircle,2);
-
         return Math.sqrt(aux1+aux2);
 
     }
