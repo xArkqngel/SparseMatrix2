@@ -28,7 +28,7 @@ public class Client  {
         input = new DataInputStream(this.socket.getInputStream());
         output = new DataOutputStream(this.socket.getOutputStream());
         startConnection();
-        System.out.println("Construido constructor");
+
 
     }
 

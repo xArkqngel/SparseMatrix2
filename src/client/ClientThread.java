@@ -34,7 +34,8 @@ public class ClientThread implements Runnable{
     public void run() {
 
         try {
-            System.out.println("Escriba su ID");
+
+            System.out.println("------ Escriba su ID ------");
             this.inputStream = new DataInputStream(this.socket.getInputStream());
             this.output = new DataOutputStream(this.socket.getOutputStream());
             String message = scanner.nextLine();
@@ -51,6 +52,7 @@ public class ClientThread implements Runnable{
             int choice = 0;
             String menu = this.inputStream.readUTF();
             do {
+                Thread.sleep(1000);
                 System.out.println(menu);
                 System.out.println("Ingrese lo que desea hacer --> ");
                 choice = this.scanner.nextInt();
@@ -107,15 +109,28 @@ public class ClientThread implements Runnable{
                         System.out.println("--- Escogiste la opcion 4 ---\nVamos a ver si puedes atrapar un Pokemon");
                         String receivePokemonToCapture = this.inputStream.readUTF();
                         System.out.println(receivePokemonToCapture);
-                        int option = scanner.nextInt();
-                        this.output.writeInt(option);
-                        String pokemonCaptured = this.inputStream.readUTF();
-                        System.out.println("Has atrapado al pokemon " + pokemonCaptured);
-                        String poke[] = pokemonCaptured.split(",");
-                        this.pokemonsCaptured.add(new Pokemon(Integer.parseInt(poke[0]),poke[1]));
+                        if (receivePokemonToCapture.equals("No hay pokemons para atrapar")){
+                            break;
+                        }else {
+                            int option = scanner.nextInt();
+                            this.output.writeInt(option);
+                            String pokemonCaptured = this.inputStream.readUTF();
+
+                            System.out.println("Has atrapado al pokemon " + pokemonCaptured);
+                            String poke[] = pokemonCaptured.split(",");
+                            this.pokemonsCaptured.add(new Pokemon(Integer.parseInt(poke[0]),poke[1]));
+                        }
+                        break;
+
+
                     case 5:
-                        for (Pokemon pokemon : this.pokemonsCaptured) {
-                            System.out.println("ID --> " + pokemon.getId() + ", Name --> " + pokemon.getName());
+                        if (this.pokemonsCaptured.isEmpty()){
+                            System.out.println("No has atrapado a ningun pokemon hasta ahora :(");
+                            break;
+                        }else {
+                            for (Pokemon pokemon : this.pokemonsCaptured) {
+                                System.out.println("ID --> " + pokemon.getId() + ", Name --> " + pokemon.getName());
+                            }
                         }
                         break;
                     case 6:
@@ -135,7 +150,7 @@ public class ClientThread implements Runnable{
 
 
             }while (choice!=7);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
