@@ -1,5 +1,7 @@
 package client;
 
+import pokemons.Pokemon;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Objects;
@@ -54,6 +56,7 @@ public class ClientThread implements Runnable{
                         this.output.writeFloat(this.scanner.nextFloat());
                         System.out.println("Ingrese la info");
                         String info = this.scanner.next();
+
                         this.output.writeUTF(info);
                         break;
                     case 2:
@@ -75,6 +78,21 @@ public class ClientThread implements Runnable{
                         String received2 = this.inputStream.readUTF();
                         System.out.println(received2);
                         break;
+                    case 4:
+                        System.out.println("--- Esogiste la opcion 4 ---\nIngrese la columna especificada");
+                        this.output.writeFloat(this.scanner.nextFloat());
+                        System.out.println("Ingrese la fila ");
+                        this.output.writeFloat(this.scanner.nextFloat());
+                        System.out.println("Ingrese la info de esa celda");
+                        String newInfo2 = this.scanner.next();
+                        this.output.writeUTF(newInfo2);
+                        String receivedDeleted  = this.inputStream.readUTF();
+                        System.out.println(receivedDeleted);
+                    case 5:
+                        System.out.println("--- Esogiste la opcion 5 ---\nIngrese la fila del rectangulo");
+                        Float [] aFloatOut = new Float[4];
+
+
 
                 }
 

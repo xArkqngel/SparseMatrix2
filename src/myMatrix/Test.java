@@ -38,7 +38,7 @@ public class Test {
 //		matrix.test();
         System.out.println( matrix.get(332F,124F));
         System.out.println( matrix.get(334F,132F));
-
+        matrix.set(332F,124F, "PELEO");
         System.out.println(matrix.elementsRectangular(123F,124F,1F,333F));
 //        System.out.println(matrix.numberInCircualArea(330F,120F,100));
        System.out.println(matrix.distanceBetween(41.57879F,1.617221F,37.176487F,-3.597929F));
